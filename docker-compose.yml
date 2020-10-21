@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+    over_de_rhein-main:
+        build: ./over-de-rhein.main.app
+        image: over-de-rhein:main-app
+        container_name: over_de_rhein-main
+        restart: unless-stopped
+        ports:
+            - 80:3001
