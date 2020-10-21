@@ -1,0 +1,23 @@
+{
+  "name": "over-de-rhein",
+  "version": "1.0.0",
+  "description": "Over de rhein applicatie",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ./src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimDer/over-de-rhein.git"
+  },
+  "author": "Tim Derksen",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/TimDer/over-de-rhein/issues"
+  },
+  "homepage": "https://github.com/TimDer/over-de-rhein#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0"
+  }
+}
