@@ -6,6 +6,7 @@ const app       = express();
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 app.set("views", "./src/view");
+app.use(express.urlencoded({ extended: false }));
 
 app.use("/", router);
 
