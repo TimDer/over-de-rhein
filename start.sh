@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # if zip is not yet installed then install it
-if ! command -v zip &> /dev/null
+if ! command -v zip
 then
     sudo apt-get install zip -y
 fi
