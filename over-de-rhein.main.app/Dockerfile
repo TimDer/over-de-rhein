@@ -1,5 +1,10 @@
 FROM node:12.19.0-stretch
 
+ENV DBPassword=empty
+ENV DBUsername=empty
+ENV DBHost=empty
+ENV DBName=empty
+
 # copy all contents into the imag
 COPY ./app /app
 
