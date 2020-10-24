@@ -8,3 +8,29 @@ services:
         restart: unless-stopped
         ports:
             - 80:3001
+        depends_on:
+            - db-over_de_rhein
+    phpmyadmin:
+        build: ./database.sql/phpmyadmin
+        image: phpmyadmin_database
+        container_name: phpmyadmin-over_de_rhein
+        restart: unless-stopped
+        environment:
+            PMA_HOST: db-over_de_rhein
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - 81:80
+        depends_on:
+            - db-over_de_rhein
+    db-over_de_rhein:
+        build: ./database.sql
+        image: database
+        container_name: db-over_de_rhein
+        restart: unless-stopped
+        volumes: 
+            - ./database.sql/data:/var/lib/mysql
+        ports: 
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
