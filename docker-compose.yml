@@ -10,6 +10,12 @@ services:
             - 80:3001
         depends_on:
             - db-over_de_rhein
+        environment:
+            DBPassword: root
+            DBUsername: root
+            DBHost: db-over_de_rhein
+            DBName: over-de-rhein
+            port: "3001"
     phpmyadmin:
         build: ./database.sql/phpmyadmin
         image: phpmyadmin_database

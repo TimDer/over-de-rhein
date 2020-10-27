@@ -4,6 +4,7 @@ ENV DBPassword=empty
 ENV DBUsername=empty
 ENV DBHost=empty
 ENV DBName=empty
+ENV port=3001
 
 # copy all contents into the imag
 COPY ./app /app
