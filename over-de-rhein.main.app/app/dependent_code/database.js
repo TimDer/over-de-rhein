@@ -4,8 +4,7 @@ const conVars = {
     host:     env.DBHost,
     user:     env.DBUsername,
     password: env.DBPassword,
-    database: env.DBName,
-    waitForConnections: true
+    database: env.DBName
 }
 
 const conn = mysql.createConnection(conVars);
