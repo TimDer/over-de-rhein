@@ -20,7 +20,7 @@ exports.loginSubmit = (req, res) => {
     const username = body.username;
     const password = body.password;
 
-    var test = new Login(username, password);
+    let test = new Login(username, password);
 
     test.get_userdata((error, data, fields) => {
         req.session.login = data[0].userID;
