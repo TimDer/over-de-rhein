@@ -1,0 +1,33 @@
+.table {
+  margin-bottom: 0;
+}
+
+body {
+  background-color: #BCBCBC;
+}
+
+body .main-container {
+  background-color: #686868;
+  min-height: calc(100vh - (2 * 20px));
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+body .main-container .logout-container {
+  text-align: right;
+  margin-top: 16px;
+}
+
+body .main-container .logout-container .logout {
+  width: 200px;
+}
+
+body .main-container .add-order {
+  margin-bottom: 16px;
+}
+
+body .main-container .table-container {
+  background-color: white;
+  padding: 10px;
+}
