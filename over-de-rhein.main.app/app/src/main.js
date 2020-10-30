@@ -12,8 +12,8 @@ const secretKey = random({
     letters: true,
 });
 
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
+app.engine('hbs', exphbs({extname: 'hbs'}));
+app.set('view engine', 'hbs');
 app.set("views", "./src/view");
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
