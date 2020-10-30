@@ -6,6 +6,7 @@ const mainPublicRouter = require(`${__dirname}/public/mainPublicRouter`);
 const loginController = require(`${__dirname}/../controller/loginController`);
 
 router.get("/", loginController.loginView);
+router.get("/logout", loginController.logout);
 router.post("/", loginController.loginSubmit);
 
 router.use("/public", mainPublicRouter);

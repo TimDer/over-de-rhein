@@ -5,8 +5,13 @@ exports.loginView = (req, res) => {
         res.render("login", { layout: false });
     }
     else {
-        res.render("orders", { layout: false });
+        res.render("orders", { headTitle: "Over de rhein" });
     }
+}
+
+exports.logout = (req, res) => {
+    req.session.login = undefined;
+    res.redirect("/");
 }
 
 exports.loginSubmit = (req, res) => {
@@ -19,7 +24,7 @@ exports.loginSubmit = (req, res) => {
 
     test.get_userdata((error, data, fields) => {
         req.session.login = data[0].userID;
-        res.render("orders", { layout: false });
+        res.redirect("/");
     }, (error, data, fields) => {
         res.render("login", { layout: false });
     });
