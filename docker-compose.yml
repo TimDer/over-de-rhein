@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 services:
     over_de_rhein-main:
@@ -16,6 +16,7 @@ services:
             DBHost: db-over_de_rhein
             DBName: over-de-rhein
             port: "3001"
+            #LOGIN_DEV: dev
     phpmyadmin:
         build: ./database.sql/phpmyadmin
         image: phpmyadmin_database
