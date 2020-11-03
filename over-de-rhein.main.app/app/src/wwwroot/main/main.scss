@@ -21,6 +21,12 @@ body {
             }
         }
 
-        @import "orders";
+        .content-container {
+            background-color: white;
+            padding: 10px;
+        }
+
+        @import "coverPages";
+        @import "liftingTests";
     }
 }

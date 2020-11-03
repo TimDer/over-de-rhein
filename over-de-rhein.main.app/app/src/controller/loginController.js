@@ -1,11 +1,17 @@
 const Login = require("../model/Login");
 
 exports.loginView = (req, res) => {
+    // escape the login form during development
+    if (process.env.LOGIN_DEV === "dev") {
+        req.session.login = "random value";
+    }
+
+    // check if the user is logedin
     if (req.session.login === undefined) {
         res.render("login", { layout: false });
     }
     else {
-        res.render("orders", { headTitle: "Over de rhein" });
+        res.render("coverPages", { headTitle: "Over de rhein", topTitle: "Over de Rhein: Opdrachten" });
     }
 }
 

@@ -23,11 +23,19 @@ body .main-container .logout-container .logout {
   width: 200px;
 }
 
-body .main-container .add-order {
+body .main-container .content-container {
+  background-color: white;
+  padding: 10px;
+}
+
+body .main-container .coverPages {
   margin-bottom: 16px;
 }
 
-body .main-container .table-container {
-  background-color: white;
-  padding: 10px;
+body .main-container .content-container label {
+  margin-bottom: 0;
+}
+
+body .main-container .liftingTests-submit {
+  margin-top: 40px;
 }

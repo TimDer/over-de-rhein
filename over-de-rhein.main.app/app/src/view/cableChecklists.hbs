@@ -1,1 +1,21 @@
-<h1>Kabelchecklist</h1>
+<a href="/" class="btn btn-primary coverPages">Terug naar overzigt</a>
+
+<div class="content-container">
+    <form action="#" method="post">
+        <div class="row">
+            <div class="col-lg">
+                <p><label for="">Draadbreuk 6 dagen</label> <input type="number" name="" class="form-control" value="{{cableDamage_6D}}"></p>
+                <p><label for="">Draadbreuk 30 dagen</label> <input type="number" name="" class="form-control" value="{{cableDamage_30D}}"></p>
+                <p><label for="">Beschadiging buitenzijde</label> <input type="number" name="" class="form-control" value="{{outsideCableDamage}}"></p>
+                <p><label for="">Beschadiging roest corrosie</label> <input type="number" name="" class="form-control" value="{{rust}}"></p>
+            </div>
+            <div class="col-lg">
+                <p><label for="">Verminderde kabeldiameter</label> <input type="number" name="" class="form-control" value="{{reducedCableDiameter}}"></p>
+                <p><label for="">Positie meetpunten</label> <input type="number" name="" class="form-control" value="{{measuringPoints}}"></p>
+                <p><label for="">Beschadiging totaal</label> <input type="number" name="" class="form-control" value="{{totalDamage}}"></p>
+                <p><label for="">Type Beschadiging roest</label> <input type="number" name="" class="form-control" value="{{damageRustType}}"></p>
+            </div>
+        </div>
+        <input type="submit" value="Opslaan" class="btn btn-success btn-block">
+    </form>
+</div>
