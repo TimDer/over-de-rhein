@@ -4,20 +4,20 @@
     <form action="#" method="post">
         <div class="row">
             <div class="col-lg">
-                <p><label for="">Datum opgesteld</label> <input type="date" name="" min="0" max="99" class="form-control" value="2019-11-25"></p>
-                <p><label for="">Hoofdgiek lengte</label> <input type="number" name="" min="0" max="99" class="form-control" value="45"></p>
-                <p><label for="">Mech sectie gieklengte</label> <input type="number" min="0" max="99" name="" class="form-control" value="32"></p>
+                <p><label for="">Datum opgesteld</label> <input type="date" name="" min="0" max="99" class="form-control" value="{{dateDrawn}}"></p>
+                <p><label for="">Hoofdgiek lengte</label> <input type="number" name="" min="0" max="99" class="form-control" value="{{mainBoomLength}}"></p>
+                <p><label for="">Mech sectie gieklengte</label> <input type="number" min="0" max="99" name="" class="form-control" value="{{mechSectionBoomLength}}"></p>
                 <p><label for="">Hulpgiek lengte</label> <input type="number" min="0" max="99" name="" class="form-control" value="69"></p>
-                <p><label for="">Hoofdgiek giekhoek</label> <input type="number" min="0" max="99" name="" class="form-control" value="84"></p>
-                <p><label for="">Heiskabel aantal parten</label> <input type="number" min="0" name="" class="form-control" value="463"></p>
+                <p><label for="">Hoofdgiek giekhoek</label> <input type="number" min="0" max="99" name="" class="form-control" value="{{jibBoomLength}}"></p>
+                <p><label for="">Heiskabel aantal parten</label> <input type="number" min="0" name="" class="form-control" value="{{hoistingCablePartsAmount}}"></p>
             </div>
             <div class="col-lg">
-                <p><label for="">Zwenkhoek</label> <input type="number" min="0" max="99" name="" class="form-control" value="11"></p>
-                <p><label for="">Eigen massa balast</label> <input type="number" name="" min="0" max="99" class="form-control" value="31"></p>
-                <p><label for="">Toelaatbare bedrijfslast</label> <input type="number" name="" min="0" max="99" class="form-control" value="55"></p>
-                <p><label for="">LMB in werking</label> <input type="number" name="" min="0" max="99" class="form-control" value="47"></p>
-                <p><label for="">Proeflast</label> <input type="number" name="" min="0" max="99" class="form-control" value="03"></p>
-                <p><label for="">Akkoord</label> <input type="checkbox" name="" class="form-control"></p>
+                <p><label for="">Zwenkhoek</label> <input type="number" min="0" max="99" name="" class="form-control" value="{{swingAngle}}"></p>
+                <p><label for="">Eigen massa balast</label> <input type="number" name="" min="0" max="99" class="form-control" value="{{ownMassBallast}}"></p>
+                <p><label for="">Toelaatbare bedrijfslast</label> <input type="number" name="" min="0" max="99" class="form-control" value="{{permissibleOperatingLoad}}"></p>
+                <p><label for="">LMB in werking</label> <input type="number" name="" min="0" max="99" class="form-control" value="{{lbmInEffect}}"></p>
+                <p><label for="">Proeflast</label> <input type="number" name="" min="0" max="99" class="form-control" value="{{testLoad}}"></p>
+                <p><label for="">Akkoord</label> <input type="checkbox" name="" class="form-control" {{Agreed}}></p>
                 <p><input type="submit" value="Opslaan" class="btn btn-success btn-block liftingTests-submit"></p>
             </div>
         </div>
