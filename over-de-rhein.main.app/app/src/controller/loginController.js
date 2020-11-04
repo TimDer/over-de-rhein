@@ -11,7 +11,7 @@ exports.loginView = (req, res) => {
         res.render("login", { layout: false });
     }
     else {
-        res.render("coverPages", { headTitle: "Over de rhein", topTitle: "Over de Rhein: Opdrachten" });
+        res.render("coverPages", { headTitle: "Over de rhein", topTitle: "Over de Rhein: Voorbald overzicht" });
     }
 }
 
