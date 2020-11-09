@@ -1,15 +1,28 @@
 {
     "liveSassCompile.settings.formats": [
     
+        // ============================== node.js version ==============================
         {
             "format": "expanded",
             "extensionName": ".css",
-            "savePath": null
+            "savePath": "/over-de-rhein.main.app/app/src/wwwroot"
         },
         {
             "format": "compressed",
             "extensionName": ".min.css",
-            "savePath": null
+            "savePath": "/over-de-rhein.main.app/app/src/wwwroot"
+        },
+
+        // ============================== exam version ==============================
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/exam-version/www/public"
+        },
+        {
+            "format": "compressed",
+            "extensionName": ".min.css",
+            "savePath": "/exam-version/www/public"
         }
     ],
 
