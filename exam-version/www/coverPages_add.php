@@ -3,8 +3,10 @@
 session_start();
 
 if (isset($_SESSION["user_id"])) {
+    require __DIR__ . "/db.php";
     require __DIR__ . "/template/header.php";
 
+    $coverPagesID = "new";
     $TCVTNumber = "";
     $inspectionDate = "";
     $executor = "";
@@ -31,6 +33,26 @@ if (isset($_SESSION["user_id"])) {
     $operatingHours = "";
     $discardReason = "";
 
+    if (isset($_GET["edit"])) {
+        $coverPagesID = $_GET["edit"];
+        $query = "SELECT coverPagesID, TCVTNumber, inspectionDate, executor, specialist, crainSetup, executionTowerHookHeight, boomType, telescopicBoomParts, constructionBoomMeters, jibBoomMeters, flyJibParts, BoomLength, topable, trolley, adjustableBoom, stampsType, shortcomings, signOutBefore, elucidation, workInstruction, cableSupplier, observations, operatingHours, discardReason FROM `coverPages` WHERE coverPagesID = '$coverPagesID'";
+        $result = mysqli_query($conn, $query);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                foreach ($row AS $key => $value) {
+                    $$key = $value;
+                }
+                $shortcomings_yes   = ((int)$row["shortcomings"] === 1) ? "checked" : "";
+                $shortcomings_no    = ((int)$row["shortcomings"] === 0) ? "checked" : "";
+                
+                $topable            = ($row["topable"] === "1")         ? "checked" : "";
+                $trolley            = ($row["trolley"] === "1")         ? "checked" : "";
+                $adjustableBoom     = ($row["adjustableBoom"] === "1")  ? "checked" : "";
+                $stampsType         = ($row["stampsType"] === "1")      ? "checked" : "";
+            }
+        }
+    }
+
     ?>
     
     <a href="/" class="btn btn-primary coverPages">Terug naar overzigt</a>
@@ -40,7 +62,7 @@ if (isset($_SESSION["user_id"])) {
             <div class="row">
                 <div class="col-lg">
                     <p><label for="#">TCVT Nummer</label> <input type="number" min="0" class="form-control" name="TCVTNumber" value="<?php echo $TCVTNumber; ?>"></p>
-                    <p><label for="#">Keuringsdatum</label> <input type="date" class="form-control" name="inspectionDate" value="<?php echo $inspectionDate; ?>"></p>
+                    <p><label for="#">Keuringsdatum</label> <input type="date" class="form-control" name="inspectionDate" value="<?php echo date("Y-m-d", strtotime($inspectionDate)); ?>"></p>
                     <p><label for="#">Uitvoerder</label> <input type="text" class="form-control" name="executor" value="<?php echo $executor; ?>"></p>
                     <p><label for="#">Deskundige</label> <input type="text" class="form-control" name="specialist" value="<?php echo $specialist; ?>"></p>
                     <p><label for="#">Opstelling kraan</label> <input type="text" class="form-control" name="crainSetup" value="<?php echo $crainSetup; ?>"></p>
@@ -68,10 +90,10 @@ if (isset($_SESSION["user_id"])) {
                             </div>
                         </div>
                     </p>
-                    <p><label for="#">Afgemeeld voor</label> <input type="date" class="form-control" name="signOutBefore" value="<?php echo $signOutBefore; ?>"></p>
+                    <p><label for="#">Afgemeeld voor</label> <input type="date" class="form-control" name="signOutBefore" value="<?php echo date("Y-m-d", strtotime($signOutBefore)); ?>"></p>
                     <p>
                         <label for="#">Toelichting</label>
-                        <textarea name="" rows="10" name="elucidation" class="form-control"><?php echo $elucidation; ?></textarea>
+                        <textarea rows="10" name="elucidation" class="form-control"><?php echo $elucidation; ?></textarea>
                     </p>
                     <p><label for="#">Werkinstructie</label> <input type="text" class="form-control" name="workInstruction" value="<?php echo $workInstruction; ?>"></p>
                     <p><label for="#">Kabelleverancier</label> <input type="text" class="form-control" name="cableSupplier" value="<?php echo $cableSupplier; ?>"></p>
@@ -79,6 +101,8 @@ if (isset($_SESSION["user_id"])) {
                     <p></p>
                     <p><label for="#">Aantal bedrijfsuren</label> <input type="number" min="0" class="form-control" name="operatingHours" value="<?php echo $operatingHours; ?>"></p>
                     <p><label for="#">Aflef redenen</label> <input type="text" class="form-control" name="discardReason" value="<?php echo $discardReason; ?>"></p>
+
+                    <input type="hidden" name="coverPagesID" value="<?php echo $coverPagesID; ?>">
                 </div>
             </div>
             <input type="submit" value="Opslaan" class="btn btn-success btn-block">
