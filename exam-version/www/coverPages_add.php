@@ -8,7 +8,7 @@ if (isset($_SESSION["user_id"])) {
 
     $coverPagesID = "new";
     $TCVTNumber = "";
-    $inspectionDate = "";
+    $inspectionDate = date("Y-m-d", time());
     $executor = "";
     $specialist = "";
     $crainSetup = "";
@@ -25,7 +25,7 @@ if (isset($_SESSION["user_id"])) {
     $stampsType = "";
     $shortcomings_yes = "";
     $shortcomings_no = "";
-    $signOutBefore = "";
+    $signOutBefore = date("Y-m-d", time());
     $elucidation = "";
     $workInstruction = "";
     $cableSupplier = "";
@@ -33,7 +33,7 @@ if (isset($_SESSION["user_id"])) {
     $operatingHours = "";
     $discardReason = "";
 
-    if (isset($_GET["edit"])) {
+    /*if (isset($_GET["edit"])) {
         $coverPagesID = $_GET["edit"];
         $query = "SELECT coverPagesID, TCVTNumber, inspectionDate, executor, specialist, crainSetup, executionTowerHookHeight, boomType, telescopicBoomParts, constructionBoomMeters, jibBoomMeters, flyJibParts, BoomLength, topable, trolley, adjustableBoom, stampsType, shortcomings, signOutBefore, elucidation, workInstruction, cableSupplier, observations, operatingHours, discardReason FROM `coverPages` WHERE coverPagesID = '$coverPagesID'";
         $result = mysqli_query($conn, $query);
@@ -51,7 +51,7 @@ if (isset($_SESSION["user_id"])) {
                 $stampsType         = ($row["stampsType"] === "1")      ? "checked" : "";
             }
         }
-    }
+    }*/
 
     ?>
     
@@ -105,6 +105,16 @@ if (isset($_SESSION["user_id"])) {
                     <input type="hidden" name="coverPagesID" value="<?php echo $coverPagesID; ?>">
                 </div>
             </div>
+
+            <?php
+            if (isset($_GET["type"]) AND $_GET["type"] === "cable") {
+                require __DIR__ . "/template/cableChecklists.php";
+            }
+            elseif (isset($_GET["type"]) AND $_GET["type"] === "test") {
+                require __DIR__ . "/template/liftingTests.php";
+            }
+            ?>
+
             <input type="submit" value="Opslaan" class="btn btn-success btn-block">
         </form>
     </div>

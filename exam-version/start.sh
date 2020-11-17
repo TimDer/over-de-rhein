@@ -19,7 +19,7 @@ sudo chown 999:999 ../database.sql/data/* -R
 
 # startup docker containers
 sudo docker-compose up
-sudo docker-compose down -v --rmi all
+sudo docker-compose down
 
 # create docker container
 cd ../database.sql
