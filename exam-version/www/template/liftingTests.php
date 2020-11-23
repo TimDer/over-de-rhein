@@ -1,11 +1,5 @@
 <?php
 
-if (!isset($_GET["edit"])) {
-    header("Location: coverPages.php");
-}
-
-session_start();
-
 if (isset($_SESSION["user_id"])) {
     $dateDrawn = date("Y-m-d", time());
     $mainBoomLength = "0";
@@ -20,8 +14,6 @@ if (isset($_SESSION["user_id"])) {
     $lbmInEffect = "0";
     $testLoad = "0";
     $Agreed = "";
-    $liftingTestsID = "new";
-    $coverPagesID = $_GET["edit"];
 
     ?>
     
@@ -41,9 +33,6 @@ if (isset($_SESSION["user_id"])) {
             <p><label for="">LMB in werking</label> <input type="number" name="lbmInEffect" min="0" max="99" class="form-control" value="<?php echo $lbmInEffect; ?>"></p>
             <p><label for="">Proeflast</label> <input type="number" name="testLoad" min="0" max="99" class="form-control" value="<?php echo $testLoad; ?>"></p>
             <p><label for="">Akkoord</label> <input type="checkbox" name="Agreed" class="form-control" <?php echo $Agreed; ?>></p>
-
-            <input type="hidden" name="liftingTestsID" value="<?php echo $liftingTestsID; ?>">
-            <input type="hidden" name="coverPagesID" value="<?php echo $coverPagesID; ?>">
         </div>
     </div>
 
@@ -51,5 +40,5 @@ if (isset($_SESSION["user_id"])) {
 }
 else {
     // not logged in
-    header("Location: login.php");
+    header("Location: ../login.php");
 }

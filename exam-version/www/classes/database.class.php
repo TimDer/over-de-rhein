@@ -23,7 +23,7 @@ class database {
         // return escaped array
         return $return;
     }
-    public static function escape($array) {
+    public static function escape(array $array) {
         // get database connection var
         global $conn;
 
@@ -32,7 +32,7 @@ class database {
     }
 
     // make a query to the database
-    public static function query($query) {
+    public static function query(string $query) {
         // get the connection var
         global $conn;
         if (mysqli_query($conn, $query)) {
@@ -105,6 +105,7 @@ class database {
         $number_start = 0;
         $number_stop = count($arrayEscape) - 1;
         foreach ($arrayEscape AS $key => $value) {
+            // determine rather or not to skip a specific key
             if (!in_array($key, $skipKey)) {
                 if ($number_start === $number_stop) {
                     // last round
@@ -119,11 +120,11 @@ class database {
         }
 
         // "WHERE clause" to query string
-        if (is_array($where)) {
+        if (is_array($whereEscape)) {
             $query_setup .= " WHERE ";
             $number_start = 0;
-            $number_stop = count($where) - 1;
-            foreach ($where AS $key => $value) {
+            $number_stop = count($whereEscape) - 1;
+            foreach ($whereEscape AS $key => $value) {
                 if (!in_array($key, $skipKey)) {
                     if ($number_start === $number_stop) {
                         // last round
@@ -137,8 +138,8 @@ class database {
                 $number_start = $number_start + 1;
             }
         }
-        elseif (is_string($where)) {
-            $query_setup .= " WHERE " . $where;
+        elseif (is_string($whereEscape)) {
+            $query_setup .= " WHERE " . $whereEscape;
         }
 
         // return the query string

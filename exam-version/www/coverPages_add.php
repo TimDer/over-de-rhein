@@ -58,7 +58,7 @@ if (isset($_SESSION["user_id"])) {
     <a href="/" class="btn btn-primary coverPages">Terug naar overzigt</a>
 
     <div class="content-container">
-        <form action="coverPages_add.submit.php" method="POST">
+        <form action="coverPages_add.submit.php?type=<?php echo $_GET["type"]; ?>" method="POST">
             <div class="row">
                 <div class="col-lg">
                     <p><label for="#">TCVT Nummer</label> <input type="number" min="0" class="form-control" name="TCVTNumber" value="<?php echo $TCVTNumber; ?>"></p>
