@@ -10,7 +10,7 @@ if (isset($_SESSION["user_id"])) {
             "dateDrawn" => $_POST["dateDrawn"],
             "mainBoomLength" => $_POST["mainBoomLength"],
             "mechSectionBoomLength" => $_POST["mechSectionBoomLength"],
-            // not yet working (Must have one more key)
+            "auxiliaryBoomLength" => $_POST["auxiliaryBoomLength"],
             "jibBoomLength" => $_POST["jibBoomLength"],
             "hoistingCablePartsAmount" => $_POST["hoistingCablePartsAmount"],
             "swingAngle" => $_POST["swingAngle"],
@@ -38,9 +38,9 @@ if (isset($_SESSION["user_id"])) {
         );
     }
 
-    var_dump($processSubdataArray);
-
+    // query the data
     if ($coverPagesID !== "new") {
+        // array to query
         if ($processSubdata === "new") {
             $processSubdataQuery = database::insert($processSubdataArray, $table);
         }
@@ -48,11 +48,14 @@ if (isset($_SESSION["user_id"])) {
             $processSubdataQuery = database::update($processSubdataArray, $table, array("coverPagesID" => $coverPagesID), array("userID"));
         }
 
-        var_dump($processSubdataQuery);
-        if (database::query($processSubdataQuery) !== true) {
+        // query to the database
+        $sql = database::query($processSubdataQuery);
+        if ($sql !== true) {
+            // if error
             header("Location: error.php");
         }
         else {
+            // done get back to coverPages.php
             header("Location: coverPages.php");
         }
     }
