@@ -1,14 +1,16 @@
 <?php
 
 if (isset($_SESSION["user_id"])) {
-    $cableDamage_6D = "0";
-    $cableDamage_30D = "0";
-    $outsideCableDamage = "0";
-    $rust = "0";
-    $reducedCableDiameter = "0";
-    $measuringPoints = "0";
-    $totalDamage = "0";
-    $damageRustType = "0";
+    if (!isset($result)) {
+        $cableDamage_6D = "0";
+        $cableDamage_30D = "0";
+        $outsideCableDamage = "0";
+        $rust = "0";
+        $reducedCableDiameter = "0";
+        $measuringPoints = "0";
+        $totalDamage = "0";
+        $damageRustType = "0";
+    }
     
     ?>
     <div class="row">
