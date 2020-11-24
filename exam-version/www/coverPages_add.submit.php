@@ -54,12 +54,16 @@ if (isset($_SESSION["user_id"])) {
         if (database::query($coverPageQuery) !== true) {
             header("Location: error.php");
         }
+
+        // Determine the "coverPageID"
+        $coverPagesID = ($coverPagesID === "new" AND isset($conn->insert_id) AND is_numeric($conn->insert_id)) ? $conn->insert_id : $coverPagesID;
+
+        // process cover page subdata
+        require __DIR__ . "/inc/processCoverPageSubdata.inc.php";
     }
-
-    $coverPagesID = (isset($conn->insert_id) AND is_numeric($conn->insert_id)) ? $conn->insert_id : $coverPagesID;
-
-    // process cover page subdata
-    require __DIR__ . "/inc/processCoverPageSubdata.inc.php";    
+    else {
+        header("Location: error.php");
+    }
 }
 else {
     // not logged in
