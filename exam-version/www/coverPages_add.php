@@ -4,7 +4,6 @@ session_start();
 
 if (isset($_SESSION["user_id"])) {
     require __DIR__ . "/db.php";
-    require __DIR__ . "/template/header.php";
 
     $coverPagesID = "new";
     $TCVTNumber = "";
@@ -33,9 +32,17 @@ if (isset($_SESSION["user_id"])) {
     $operatingHours = "";
     $discardReason = "";
 
-    /*if (isset($_GET["edit"])) {
-        $coverPagesID = $_GET["edit"];
-        $query = "SELECT coverPagesID, TCVTNumber, inspectionDate, executor, specialist, crainSetup, executionTowerHookHeight, boomType, telescopicBoomParts, constructionBoomMeters, jibBoomMeters, flyJibParts, BoomLength, topable, trolley, adjustableBoom, stampsType, shortcomings, signOutBefore, elucidation, workInstruction, cableSupplier, observations, operatingHours, discardReason FROM `coverPages` WHERE coverPagesID = '$coverPagesID'";
+    if (isset($_GET["edit"])) {
+        $coverPagesID = (int)mysqli_real_escape_string($conn, $_GET["edit"]);
+        $query = "SELECT `coverPages`.`coverPagesID`, `coverPages`.`userID`, `coverPages`.`TCVTNumber`, `coverPages`.`inspectionDate`, `coverPages`.`executor`, `coverPages`.`specialist`, `coverPages`.`crainSetup`, `coverPages`.`executionTowerHookHeight`, `coverPages`.`boomType`, `coverPages`.`telescopicBoomParts`, `coverPages`.`constructionBoomMeters`, `coverPages`.`jibBoomMeters`, `coverPages`.`flyJibParts`, `coverPages`.`BoomLength`, `coverPages`.`topable`, `coverPages`.`trolley`, `coverPages`.`adjustableBoom`, `coverPages`.`stampsType`, `coverPages`.`shortcomings`, `coverPages`.`signOutBefore`, `coverPages`.`elucidation`, `coverPages`.`workInstruction`, `coverPages`.`cableSupplier`, `coverPages`.`observations`, `coverPages`.`operatingHours`, `coverPages`.`discardReason`, ";
+        // FROM `coverPages`
+        if ($_GET["type"] === "cable") {
+            $query .= "`cableChecklists`.`cableDamage_6D`, `cableChecklists`.`cableDamage_30D`, `cableChecklists`.`outsideCableDamage`, `cableChecklists`.`rust`, `cableChecklists`.`reducedCableDiameter`, `cableChecklists`.`measuringPoints`, `cableChecklists`.`totalDamage`, `cableChecklists`.`damageRustType` FROM `coverPages` INNER JOIN `cableChecklists` ON `coverPages`.`coverPagesID` = `cableChecklists`.`coverPagesID`";
+        }
+        elseif ($_GET["type"] === "test") {
+            $query .= "`liftingTests`.`dateDrawn`, `liftingTests`.`mainBoomLength`, `liftingTests`.`mechSectionBoomLength`, `liftingTests`.`auxiliaryBoomLength`, `liftingTests`.`jibBoomLength`, `liftingTests`.`hoistingCablePartsAmount`, `liftingTests`.`swingAngle`, `liftingTests`.`ownMassBallast`, `liftingTests`.`permissibleOperatingLoad`, `liftingTests`.`lbmInEffect`, `liftingTests`.`testLoad`, `liftingTests`.`Agreed` FROM `coverPages` INNER JOIN `liftingTests` ON `coverPages`.`coverPagesID` = `liftingTests`.`coverPagesID`";
+        }
+        $query .= " WHERE `coverPages`.`coverPagesID` = '$coverPagesID'";
         $result = mysqli_query($conn, $query);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -51,7 +58,12 @@ if (isset($_SESSION["user_id"])) {
                 $stampsType         = ($row["stampsType"] === "1")      ? "checked" : "";
             }
         }
-    }*/
+        else {
+            header("Location: error.php");
+        }
+    }
+
+    require __DIR__ . "/template/header.php";
 
     ?>
     
