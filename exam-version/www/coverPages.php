@@ -27,7 +27,8 @@ if (isset($_SESSION["user_id"])) {
                                 `coverPageStatus`.`statusType`,
                                 `cableChecklists`.`cableChecklistsID` FROM `coverPages`
                         LEFT JOIN `cableChecklists` ON `cableChecklists`.`coverPagesID` = `coverPages`.`coverPagesID`
-                        INNER JOIN `coverPageStatus` ON `coverPages`.`coverPageStatusID` = `coverPageStatus`.`coverPageStatusID`";
+                        INNER JOIN `coverPageStatus` ON `coverPages`.`coverPageStatusID` = `coverPageStatus`.`coverPageStatusID`
+                        ORDER BY `coverPages`.`coverPagesID` DESC";
                 $result = mysqli_query($conn, $query);
 
                 if ($result->num_rows > 0) {
