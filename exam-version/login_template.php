@@ -33,3 +33,30 @@ else {
     // not logged in
     header("Location: login.php");
 }
+
+
+
+?>
+
+<?php /* ============================================================ admin secction ============================================================ */ ?>
+<?php /* ============================================================ admin secction ============================================================ */ ?>
+
+
+
+<?php
+
+session_start();
+
+if (isset($_SESSION["admin_id"])) {
+    require __DIR__ . "/../template/header.php"; ?>
+    
+    
+
+    <?php require __DIR__ . "/../template/footer.php";
+}
+else {
+    // not logged in
+    header("Location: ../login.php");
+}
+
+?>
