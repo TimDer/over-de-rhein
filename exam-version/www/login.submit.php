@@ -14,8 +14,16 @@ if (mysqli_num_rows($result) > 0) {
         
         if ($password_sult === $row["password"]) {
             session_start();
-            $_SESSION["user_id"] = $row["userID"];
-            header("Location: index.php");
+            if ($row["type"] === "admin") {
+                // login as admin
+                $_SESSION["admin_id"] = $row["userID"];
+                header("Location: /admin/index.php");
+            }
+            else {
+                // login as a user
+                $_SESSION["user_id"] = $row["userID"];
+                header("Location: index.php");
+            }
         }
         else {
             header("Location: login.php");
