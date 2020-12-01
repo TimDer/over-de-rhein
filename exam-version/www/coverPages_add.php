@@ -34,7 +34,7 @@ if (isset($_SESSION["user_id"])) {
 
     if (isset($_GET["edit"])) {
         $coverPagesID = (int)mysqli_real_escape_string($conn, $_GET["edit"]);
-        $query = "SELECT `coverPages`.`coverPagesID`, `coverPages`.`userID`, `coverPages`.`TCVTNumber`, `coverPages`.`inspectionDate`, `coverPages`.`executor`, `coverPages`.`specialist`, `coverPages`.`crainSetup`, `coverPages`.`executionTowerHookHeight`, `coverPages`.`boomType`, `coverPages`.`telescopicBoomParts`, `coverPages`.`constructionBoomMeters`, `coverPages`.`jibBoomMeters`, `coverPages`.`flyJibParts`, `coverPages`.`BoomLength`, `coverPages`.`topable`, `coverPages`.`trolley`, `coverPages`.`adjustableBoom`, `coverPages`.`stampsType`, `coverPages`.`shortcomings`, `coverPages`.`signOutBefore`, `coverPages`.`elucidation`, `coverPages`.`workInstruction`, `coverPages`.`cableSupplier`, `coverPages`.`observations`, `coverPages`.`operatingHours`, `coverPages`.`discardReason`, ";
+        $query = "SELECT `coverPages`.`coverPagesID`, `coverPages`.`userID`, `coverPageStatus`.`statusType`, `coverPageStatus`.`coverPageStatusID`, `coverPages`.`TCVTNumber`, `coverPages`.`inspectionDate`, `coverPages`.`executor`, `coverPages`.`specialist`, `coverPages`.`crainSetup`, `coverPages`.`executionTowerHookHeight`, `coverPages`.`boomType`, `coverPages`.`telescopicBoomParts`, `coverPages`.`constructionBoomMeters`, `coverPages`.`jibBoomMeters`, `coverPages`.`flyJibParts`, `coverPages`.`BoomLength`, `coverPages`.`topable`, `coverPages`.`trolley`, `coverPages`.`adjustableBoom`, `coverPages`.`stampsType`, `coverPages`.`shortcomings`, `coverPages`.`signOutBefore`, `coverPages`.`elucidation`, `coverPages`.`workInstruction`, `coverPages`.`cableSupplier`, `coverPages`.`observations`, `coverPages`.`operatingHours`, `coverPages`.`discardReason`, ";
         // FROM `coverPages`
         if ($_GET["type"] === "cable") {
             $query .= "`cableChecklists`.`cableDamage_6D`, `cableChecklists`.`cableDamage_30D`, `cableChecklists`.`outsideCableDamage`, `cableChecklists`.`rust`, `cableChecklists`.`reducedCableDiameter`, `cableChecklists`.`measuringPoints`, `cableChecklists`.`totalDamage`, `cableChecklists`.`damageRustType` FROM `coverPages` INNER JOIN `cableChecklists` ON `coverPages`.`coverPagesID` = `cableChecklists`.`coverPagesID`";
@@ -42,6 +42,7 @@ if (isset($_SESSION["user_id"])) {
         elseif ($_GET["type"] === "test") {
             $query .= "`liftingTests`.`dateDrawn`, `liftingTests`.`mainBoomLength`, `liftingTests`.`mechSectionBoomLength`, `liftingTests`.`auxiliaryBoomLength`, `liftingTests`.`jibBoomLength`, `liftingTests`.`hoistingCablePartsAmount`, `liftingTests`.`swingAngle`, `liftingTests`.`ownMassBallast`, `liftingTests`.`permissibleOperatingLoad`, `liftingTests`.`lbmInEffect`, `liftingTests`.`testLoad`, `liftingTests`.`Agreed` FROM `coverPages` INNER JOIN `liftingTests` ON `coverPages`.`coverPagesID` = `liftingTests`.`coverPagesID`";
         }
+        $query .= " LEFT JOIN `coverPageStatus` ON `coverPages`.`coverPageStatusID` = `coverPageStatus`.`coverPageStatusID`";
         $query .= " WHERE `coverPages`.`coverPagesID` = '$coverPagesID'";
         $result = mysqli_query($conn, $query);
         if ($result->num_rows > 0) {
@@ -87,10 +88,20 @@ if (isset($_SESSION["user_id"])) {
                     <p><label for="#">Gieklengte</label> <input type="number" class="form-control" name="BoomLength" value="<?php echo $BoomLength; ?>"></p>
                 </div>
                 <div class="col-lg">
-                    <p><label for="#">Topbaar</label> <input type="checkbox" class="form-control" name="topable" <?php echo $topable; ?>></p>
-                    <p><label for="#">Loopkat</label> <input type="checkbox" class="form-control" name="trolley" <?php echo $trolley; ?>></p>
-                    <p><label for="#">Verstelbare giek</label> <input type="checkbox" class="form-control" name="adjustableBoom" <?php echo $adjustableBoom; ?>></p>
-                    <p><label for="#">Soort stempels</label> <input type="checkbox" class="form-control" name="stampsType" <?php echo $stampsType; ?>></p>
+                    <div class="row">
+                        <div class="col-lg">
+                            <p><label for="#">Topbaar</label> <input type="checkbox" class="form-control" name="topable" <?php echo $topable; ?>></p>
+                        </div>
+                        <div class="col-lg">
+                            <p><label for="#">Loopkat</label> <input type="checkbox" class="form-control" name="trolley" <?php echo $trolley; ?>></p>
+                        </div>
+                        <div class="col-lg">
+                        <p><label for="#">Verstelbare_giek</label> <input type="checkbox" class="form-control" name="adjustableBoom" <?php echo $adjustableBoom; ?>></p>
+                        </div>
+                        <div class="col-lg">
+                            <p><label for="#">Soort_stempels</label> <input type="checkbox" class="form-control" name="stampsType" <?php echo $stampsType; ?>></p>
+                        </div>
+                    </div>
                     <p>
                         <label for="#">Tekortkomingen</label>
                         <div class="row">
@@ -105,7 +116,7 @@ if (isset($_SESSION["user_id"])) {
                     <p><label for="#">Afgemeeld voor</label> <input type="date" class="form-control" name="signOutBefore" value="<?php echo date("Y-m-d", strtotime($signOutBefore)); ?>"></p>
                     <p>
                         <label for="#">Toelichting</label>
-                        <textarea rows="10" name="elucidation" class="form-control"><?php echo $elucidation; ?></textarea>
+                        <textarea name="elucidation" class="form-control elucidation"><?php echo $elucidation; ?></textarea>
                     </p>
                     <p><label for="#">Werkinstructie</label> <input type="text" class="form-control" name="workInstruction" value="<?php echo $workInstruction; ?>"></p>
                     <p><label for="#">Kabelleverancier</label> <input type="text" class="form-control" name="cableSupplier" value="<?php echo $cableSupplier; ?>"></p>
@@ -113,6 +124,8 @@ if (isset($_SESSION["user_id"])) {
                     <p></p>
                     <p><label for="#">Aantal bedrijfsuren</label> <input type="number" min="0" class="form-control" name="operatingHours" value="<?php echo $operatingHours; ?>"></p>
                     <p><label for="#">Aflef redenen</label> <input type="text" class="form-control" name="discardReason" value="<?php echo $discardReason; ?>"></p>
+
+                    
 
                     <input type="hidden" name="coverPagesID" value="<?php echo $coverPagesID; ?>">
                 </div>
