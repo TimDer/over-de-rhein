@@ -33,7 +33,7 @@ if (isset($_SESSION["admin_id"])) {
                         <td><?php echo $value["userID"] ?></td>
                         <td><?php echo $value["userName"] ?></td>
                         <td><?php echo $value["type"] ?></td>
-                        <td><a href="user_add_edit.php?id=<?php echo $value["userID"] ?>" class="btn btn-primary">Bewerken</a> <a href="#" class="btn btn-primary">Verwijderen</a></td>
+                        <td><a href="user_add_edit.php?id=<?php echo $value["userID"] ?>" class="btn btn-primary">Bewerken</a> <a href="user_delete.submit.php?id=<?php echo $value["userID"] ?>" class="btn btn-primary">Verwijderen</a></td>
                     </tr>
                 <?php } ?>
             </tbody>
