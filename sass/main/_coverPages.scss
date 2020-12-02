@@ -7,8 +7,12 @@
         margin-bottom: 0;
     }
 
+    hr {
+        border-top: 1px solid black !important;
+    }
+
     .elucidation {
-        height: 216px;
+        height: 138px;
         resize: none;
     }
 }
