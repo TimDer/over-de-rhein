@@ -12,16 +12,17 @@ RUN apt-get install -y tzdata < input.txt
 RUN rm input.txt
 
 # Install PHP
-RUN apt-get install php7.4 -y
-RUN apt-get install libapache2-mod-php7.4 -y
-RUN apt-get install php7.4-mysql -y
-RUN apt-get install php7.4-cli -y
-RUN apt-get install php7.4-zip -y
+RUN apt-get install php7.4 \
+                    libapache2-mod-php7.4 \
+                    php7.4-mysql -y
 
 # Install apache2
-RUN apt-get install -y apache2
-RUN a2enmod rewrite
-RUN rm /var/www/html/index.html
+RUN apt-get install -y apache2 \
+    a2enmod rewrite \
+    rm /var/www/html/index.html
+
+# delete cache
+RUN rm -fr /var/cache/*
 
 # run apache in the foreground
 CMD apachectl -D FOREGROUND
