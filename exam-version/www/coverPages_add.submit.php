@@ -13,7 +13,7 @@ if (isset($_SESSION["user_id"])) {
     $coverPageArray = array(
         "TCVTNumber"                => $_POST["TCVTNumber"],
         "userID"                    => $_SESSION["user_id"],
-        "coverPageStatusID"         => 1,
+        "coverPageStatusID"         => (int)$_POST["coverPageStatusID"],
         "inspectionDate"            => $_POST["inspectionDate"],
         "executor"                  => $_POST["executor"],
         "specialist"                => $_POST["specialist"],

@@ -6,6 +6,7 @@ if (isset($_SESSION["user_id"])) {
     require __DIR__ . "/db.php";
 
     $coverPagesID = "new";
+    $coverPageStatusID = "";
     $TCVTNumber = "";
     $inspectionDate = date("Y-m-d", time());
     $executor = "";
@@ -61,6 +62,15 @@ if (isset($_SESSION["user_id"])) {
         }
         else {
             header("Location: error.php");
+        }
+    }
+
+    // query the status
+    $coverPageStatusArray = array();
+    $resultStatus = mysqli_query($conn, "SELECT * FROM `coverPageStatus`");
+    if ($resultStatus->num_rows > 0) {
+        while ($rows = $resultStatus->fetch_assoc()) {
+            $coverPageStatusArray[] = $rows;
         }
     }
 
@@ -124,12 +134,21 @@ if (isset($_SESSION["user_id"])) {
                     <p></p>
                     <p><label for="#">Aantal bedrijfsuren</label> <input type="number" min="0" class="form-control" name="operatingHours" value="<?php echo $operatingHours; ?>"></p>
                     <p><label for="#">Aflef redenen</label> <input type="text" class="form-control" name="discardReason" value="<?php echo $discardReason; ?>"></p>
-
+                    <p>
+                        <label for="#">Status</label>
+                        <select name="coverPageStatusID" class="form-control">
+                            <?php foreach ($coverPageStatusArray AS $key => $value) { ?>
+                                <option value="<?php echo $value["coverPageStatusID"]; ?>" <?php echo ($value["coverPageStatusID"] === $coverPageStatusID) ? "selected": ""; ?>><?php echo $value["statusType"]; ?></option>
+                            <?php } ?>
+                        </select>
+                    </p>
                     
 
                     <input type="hidden" name="coverPagesID" value="<?php echo $coverPagesID; ?>">
                 </div>
             </div>
+
+            <hr>
 
             <?php
             if (isset($_GET["type"]) AND $_GET["type"] === "cable") {
