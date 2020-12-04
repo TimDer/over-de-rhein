@@ -57,7 +57,6 @@ if (isset($_SESSION["user_id"])) {
                 $topable            = ($row["topable"] === "1")         ? "checked" : "";
                 $trolley            = ($row["trolley"] === "1")         ? "checked" : "";
                 $adjustableBoom     = ($row["adjustableBoom"] === "1")  ? "checked" : "";
-                $stampsType         = ($row["stampsType"] === "1")      ? "checked" : "";
             }
         }
         else {
@@ -96,6 +95,15 @@ if (isset($_SESSION["user_id"])) {
                     <p><label for="#">hulpgiek meters</label> <input type="number" class="form-control" name="jibBoomMeters" value="<?php echo $jibBoomMeters; ?>"></p>
                     <p><label for="#">Fly jib delen</label> <input type="number" class="form-control" name="flyJibParts" value="<?php echo $flyJibParts; ?>"></p>
                     <p><label for="#">Gieklengte</label> <input type="number" class="form-control" name="BoomLength" value="<?php echo $BoomLength; ?>"></p>
+
+
+                    <p>
+                        <label for="#">Soort stempels</label>
+                        <select name="stampsType" class="form-control">
+                            <option value="1" <?php echo ((int)$stampsType === 1) ? "selected": ""; ?>>Stempels</option>
+                            <option value="2" <?php echo ((int)$stampsType === 2) ? "selected": ""; ?>>Doozerblad</option>
+                        </select>
+                    </p>
                 </div>
                 <div class="col-lg">
                     <div class="row">
@@ -106,10 +114,7 @@ if (isset($_SESSION["user_id"])) {
                             <p><label for="#">Loopkat</label> <input type="checkbox" class="form-control" name="trolley" <?php echo $trolley; ?>></p>
                         </div>
                         <div class="col-lg">
-                        <p><label for="#">Verstelbare_giek</label> <input type="checkbox" class="form-control" name="adjustableBoom" <?php echo $adjustableBoom; ?>></p>
-                        </div>
-                        <div class="col-lg">
-                            <p><label for="#">Soort_stempels</label> <input type="checkbox" class="form-control" name="stampsType" <?php echo $stampsType; ?>></p>
+                        <p><label for="#">Verstelbare giek</label> <input type="checkbox" class="form-control" name="adjustableBoom" <?php echo $adjustableBoom; ?>></p>
                         </div>
                     </div>
                     <p>

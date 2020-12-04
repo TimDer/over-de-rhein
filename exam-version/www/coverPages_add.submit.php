@@ -28,7 +28,7 @@ if (isset($_SESSION["user_id"])) {
         "topable"                   => (isset($_POST["topable"]))        ? 1 : 0,
         "trolley"                   => (isset($_POST["trolley"]))        ? 1 : 0,
         "adjustableBoom"            => (isset($_POST["adjustableBoom"])) ? 1 : 0,
-        "stampsType"                => (isset($_POST["stampsType"]))     ? 1 : 0,
+        "stampsType"                => $_POST["stampsType"],
         "shortcomings"              => (isset($_POST["shortcomings"]))   ? 1 : 0,
         "signOutBefore"             => $_POST["signOutBefore"],
         "elucidation"               => $_POST["elucidation"],
