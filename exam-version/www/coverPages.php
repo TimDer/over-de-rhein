@@ -11,6 +11,12 @@ if (isset($_SESSION["user_id"])) {
     
     <div class="content-container">
         <h1>Overzicht</h1>
+
+        <a href="coverPages.php" class="btn btn-primary">Status open</a>
+        <a href="coverPages.php?statusClosed=true" class="btn btn-primary">Status gesloten</a>
+
+        <br><br>
+
         <table class="table">
             <thead>
                 <tr>
@@ -22,12 +28,15 @@ if (isset($_SESSION["user_id"])) {
             </thead>
             <tbody>
                 <?php
+                $statusQuery = (isset($_GET["statusClosed"])) ? "2": "1";
+
                 $query = "SELECT `coverPages`.`coverPagesID`,
                                 `coverPages`.`inspectionDate`,
                                 `coverPageStatus`.`statusType`,
                                 `cableChecklists`.`cableChecklistsID` FROM `coverPages`
                         LEFT JOIN `cableChecklists` ON `cableChecklists`.`coverPagesID` = `coverPages`.`coverPagesID`
                         INNER JOIN `coverPageStatus` ON `coverPages`.`coverPageStatusID` = `coverPageStatus`.`coverPageStatusID`
+                        WHERE `coverPages`.`coverPageStatusID`='$statusQuery'
                         ORDER BY `coverPages`.`coverPagesID` DESC";
                 $result = mysqli_query($conn, $query);
 
