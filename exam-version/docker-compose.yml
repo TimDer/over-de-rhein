@@ -7,7 +7,7 @@ services:
         container_name: php_server_dev
         restart: unless-stopped
         volumes:
-            - ./www-with-bug:/var/www/html
+            - ./www-old:/var/www/html
             - ./php.ini:/etc/php/7.4/apache2/php.ini
         ports: 
             - 80:80

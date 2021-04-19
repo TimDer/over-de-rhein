@@ -17,8 +17,8 @@ RUN apt-get install php7.4 \
                     php7.4-mysql -y
 
 # Install apache2
-RUN apt-get install -y apache2 \
-    a2enmod rewrite \
+RUN apt-get install -y apache2 && \
+    a2enmod rewrite && \
     rm /var/www/html/index.html
 
 # delete cache
