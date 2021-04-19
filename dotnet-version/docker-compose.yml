@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    mssql-db:
+        build: ./mssql-database
+        image: mssql-db
+        container_name: mssql-db
+        restart: unless-stopped
+        volumes: 
+            - ./mssql-database/data:/var/opt/mssql
+        ports: 
+            - 1433:1433

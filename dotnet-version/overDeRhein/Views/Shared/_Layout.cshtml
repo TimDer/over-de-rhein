@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.min.css">
+    <title>Over de Rhein</title>
+</head>
+<body>
+    <div class="container main-container">
+
+        @RenderBody()
+
+        <div class="logout-container">
+            <form asp-controller="login" asp-action="logout" method="get">
+                <input type="submit" class="btn btn-primary logout" value="Exit">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
