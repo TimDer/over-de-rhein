@@ -1,0 +1,14 @@
+{
+  "name": "sass",
+  "version": "1.0.0",
+  "description": "Over-de-rhein-global-scss",
+  "main": "main.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Derksen",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bootstrap": "^4.6.0"
+  }
+}
