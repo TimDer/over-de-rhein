@@ -10,7 +10,7 @@ using overDeRhein.Data;
 namespace overDeRhein.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210419155156_DBInit")]
+    [Migration("20210421140246_DBInit")]
     partial class DBInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,11 +63,28 @@ namespace overDeRhein.Migrations
 
                     b.HasKey("CableChecklistsID");
 
-                    b.HasIndex("CoverPagesID");
+                    b.HasIndex("CoverPagesID")
+                        .IsUnique();
 
                     b.HasIndex("UsersUserID");
 
                     b.ToTable("CableChecklists");
+
+                    b.HasData(
+                        new
+                        {
+                            CableChecklistsID = 1,
+                            CableDamage_30D = 3,
+                            CableDamage_6D = 3,
+                            CoverPagesID = 2,
+                            DamageRustType = 435,
+                            MeasuringPoints = 8475,
+                            OutsideCableDamage = 44,
+                            ReducedCableDiameter = 34,
+                            Rust = 54,
+                            TotalDamage = 45,
+                            UserID = 2
+                        });
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.CoverPageStatus", b =>
@@ -84,6 +101,46 @@ namespace overDeRhein.Migrations
                     b.HasKey("CoverPageStatusID");
 
                     b.ToTable("CoverPageStatus");
+
+                    b.HasData(
+                        new
+                        {
+                            CoverPageStatusID = 1,
+                            StatusType = "Open"
+                        },
+                        new
+                        {
+                            CoverPageStatusID = 2,
+                            StatusType = "Gesloten"
+                        });
+                });
+
+            modelBuilder.Entity("overDeRhein.Data.Models.CoverPageType", b =>
+                {
+                    b.Property<int>("CoverPageTypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("CoverPageTypeID");
+
+                    b.ToTable("CoverPageType");
+
+                    b.HasData(
+                        new
+                        {
+                            CoverPageTypeID = 1,
+                            Type = "Hijs-testen"
+                        },
+                        new
+                        {
+                            CoverPageTypeID = 2,
+                            Type = "Kabel-check-lijst"
+                        });
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.CoverPages", b =>
@@ -113,13 +170,16 @@ namespace overDeRhein.Migrations
                     b.Property<int>("CoverPageStatusID")
                         .HasColumnType("int");
 
+                    b.Property<int>("CoverPageTypeID")
+                        .HasColumnType("int");
+
                     b.Property<string>("CrainSetup")
                         .HasMaxLength(52)
                         .HasColumnType("nvarchar(52)");
 
-                    b.Property<int>("DiscardReason")
+                    b.Property<string>("DiscardReason")
                         .HasMaxLength(500)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Elucidation")
                         .HasMaxLength(250)
@@ -173,8 +233,8 @@ namespace overDeRhein.Migrations
                     b.Property<double>("TelescopicBoomParts")
                         .HasColumnType("float");
 
-                    b.Property<double>("Topable")
-                        .HasColumnType("float");
+                    b.Property<byte>("Topable")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte>("Trolley")
                         .HasColumnType("tinyint");
@@ -190,11 +250,79 @@ namespace overDeRhein.Migrations
 
                     b.HasIndex("CoverPageStatusID");
 
+                    b.HasIndex("CoverPageTypeID");
+
                     b.HasIndex("SignaturesID");
 
                     b.HasIndex("UserID");
 
                     b.ToTable("CoverPages");
+
+                    b.HasData(
+                        new
+                        {
+                            CoverPagesID = 1,
+                            AdjustableBoom = (byte)1,
+                            BoomLength = 6.0,
+                            BoomType = "hfdsf",
+                            CableSupplier = "Hello world",
+                            ConstructionBoomMeters = 6.0,
+                            CoverPageStatusID = 1,
+                            CoverPageTypeID = 1,
+                            CrainSetup = "owreuityert",
+                            DiscardReason = "Broken",
+                            Elucidation = "hjg",
+                            ExecutionTowerHookHeight = 4378,
+                            Executor = "ksgfskdajf",
+                            FlyJibParts = 5,
+                            InspectionDate = new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JibBoomMeters = 6.0,
+                            Observations = "hello it is me",
+                            OperatingHours = 5,
+                            Shortcomings = (byte)0,
+                            SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignatureID = 0,
+                            Specialist = "dkshjfgfh",
+                            StampsType = 5,
+                            TCVTNumber = 234,
+                            TelescopicBoomParts = 6.0,
+                            Topable = (byte)1,
+                            Trolley = (byte)1,
+                            UserID = 2,
+                            WorkInstruction = "dskgf"
+                        },
+                        new
+                        {
+                            CoverPagesID = 2,
+                            AdjustableBoom = (byte)1,
+                            BoomLength = 7.0,
+                            BoomType = "hfdsf",
+                            CableSupplier = "Hello world",
+                            ConstructionBoomMeters = 7.0,
+                            CoverPageStatusID = 1,
+                            CoverPageTypeID = 1,
+                            CrainSetup = "zsngfye",
+                            DiscardReason = "Broken",
+                            Elucidation = "hre78v",
+                            ExecutionTowerHookHeight = 657,
+                            Executor = "dsjbvjkdb",
+                            FlyJibParts = 6,
+                            InspectionDate = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            JibBoomMeters = 7.0,
+                            Observations = "hello it is not me",
+                            OperatingHours = 6,
+                            Shortcomings = (byte)0,
+                            SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            SignatureID = 0,
+                            Specialist = "ouirehjbgf",
+                            StampsType = 6,
+                            TCVTNumber = 234,
+                            TelescopicBoomParts = 7.0,
+                            Topable = (byte)1,
+                            Trolley = (byte)1,
+                            UserID = 2,
+                            WorkInstruction = "dskghkgf"
+                        });
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.LiftingTests", b =>
@@ -204,8 +332,8 @@ namespace overDeRhein.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Agreed")
-                        .HasColumnType("bit");
+                    b.Property<byte>("Agreed")
+                        .HasColumnType("tinyint");
 
                     b.Property<double>("AuxiliaryBoomLength")
                         .HasColumnType("float");
@@ -251,11 +379,32 @@ namespace overDeRhein.Migrations
 
                     b.HasKey("LiftingTestsID");
 
-                    b.HasIndex("CoverPagesID");
+                    b.HasIndex("CoverPagesID")
+                        .IsUnique();
 
                     b.HasIndex("UsersUserID");
 
                     b.ToTable("LiftingTests");
+
+                    b.HasData(
+                        new
+                        {
+                            LiftingTestsID = 1,
+                            Agreed = (byte)1,
+                            AuxiliaryBoomLength = 5.0,
+                            CoverPagesID = 1,
+                            DateDrawn = new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HoistingCablePartsAmount = 3,
+                            JibBoomLength = 4,
+                            LbmInEffect = 4.0,
+                            MainBoomLength = 6,
+                            MechSectionBoomLength = 6,
+                            OwnMassBallast = 44,
+                            PermissibleOperatingLoad = 34.0,
+                            SwingAngle = 3,
+                            TestLoad = 44.0,
+                            UserID = 2
+                        });
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.Signatures", b =>
@@ -361,8 +510,8 @@ namespace overDeRhein.Migrations
             modelBuilder.Entity("overDeRhein.Data.Models.CableChecklists", b =>
                 {
                     b.HasOne("overDeRhein.Data.Models.CoverPages", "CoverPage")
-                        .WithMany()
-                        .HasForeignKey("CoverPagesID")
+                        .WithOne("CableChecklists")
+                        .HasForeignKey("overDeRhein.Data.Models.CableChecklists", "CoverPagesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -383,6 +532,12 @@ namespace overDeRhein.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("overDeRhein.Data.Models.CoverPageType", "CoverPageType")
+                        .WithMany("CoverPages")
+                        .HasForeignKey("CoverPageTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("overDeRhein.Data.Models.Signatures", "Signatures")
                         .WithMany("CoverPages")
                         .HasForeignKey("SignaturesID");
@@ -395,6 +550,8 @@ namespace overDeRhein.Migrations
 
                     b.Navigation("CoverPageStatus");
 
+                    b.Navigation("CoverPageType");
+
                     b.Navigation("Signatures");
 
                     b.Navigation("User");
@@ -403,8 +560,8 @@ namespace overDeRhein.Migrations
             modelBuilder.Entity("overDeRhein.Data.Models.LiftingTests", b =>
                 {
                     b.HasOne("overDeRhein.Data.Models.CoverPages", "CoverPage")
-                        .WithMany()
-                        .HasForeignKey("CoverPagesID")
+                        .WithOne("LiftingTests")
+                        .HasForeignKey("overDeRhein.Data.Models.LiftingTests", "CoverPagesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -431,6 +588,18 @@ namespace overDeRhein.Migrations
             modelBuilder.Entity("overDeRhein.Data.Models.CoverPageStatus", b =>
                 {
                     b.Navigation("CoverPages");
+                });
+
+            modelBuilder.Entity("overDeRhein.Data.Models.CoverPageType", b =>
+                {
+                    b.Navigation("CoverPages");
+                });
+
+            modelBuilder.Entity("overDeRhein.Data.Models.CoverPages", b =>
+                {
+                    b.Navigation("CableChecklists");
+
+                    b.Navigation("LiftingTests");
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.Signatures", b =>

@@ -1,0 +1,50 @@
+@model overDeRhein.ViewModels.CoverPageStatusViewModel;
+
+@foreach (var CoverPageType in Model.CoverPageType)
+{
+    <a  asp-controller="CoverPage"
+        asp-action="Add"
+        asp-route-type="@CoverPageType.Type"
+        class="btn btn-primary coverPages">
+        Een @CoverPageType.Type toevoegen
+    </a>
+}
+
+<div class="content-container">
+    <h1>Overzicht</h1>
+
+    <a asp-controller="CoverPage" asp-action="Index" class="btn btn-primary">Status open</a>
+    <a asp-controller="CoverPage" asp-action="StatusClosed" class="btn btn-primary">Status gesloten</a>
+
+    <br><br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Actie</th>
+                <th>Datum</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var CoverPage in Model.CoverPages)
+            {
+                <tr>
+                    <td>
+                        <a  asp-controller="CoverPage"
+                            asp-action="Edit"
+                            asp-route-type="@CoverPage.CoverPageType.Type"
+                            asp-route-edit="@CoverPage.CoverPagesID"
+                            class="btn btn-primary">
+                            Bewerk: @CoverPage.CoverPagesID
+                        </a>
+                    </td>
+                    <td>@CoverPage.InspectionDate</td>
+                    <td>@CoverPage.CoverPageType.Type</td>
+                    <td>@CoverPage.CoverPageStatus.StatusType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

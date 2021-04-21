@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace overDeRhein.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        [Authorize]
         public IActionResult Index() {
-            return View();
+            return Redirect("/CoverPage");
         }
     }
 }

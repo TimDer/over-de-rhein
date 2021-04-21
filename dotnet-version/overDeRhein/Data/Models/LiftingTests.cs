@@ -18,7 +18,7 @@ namespace overDeRhein.Data.Models
         public double PermissibleOperatingLoad { get; set; }
         public double LbmInEffect { get; set; }
         public double TestLoad { get; set; }
-        public bool Agreed { get; set; }
+        public byte Agreed { get; set; }
 
 
         // ============================== foreigners ==============================

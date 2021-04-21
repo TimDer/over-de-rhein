@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace overDeRhein.Data.Models
@@ -23,7 +24,7 @@ namespace overDeRhein.Data.Models
         public double JibBoomMeters { get; set; }
         public int FlyJibParts { get; set; }
         public double BoomLength { get; set; }
-        public double Topable { get; set; }
+        public byte Topable { get; set; }
         public byte Trolley { get; set; }
         public byte AdjustableBoom { get; set; }
         public int StampsType { get; set; }
@@ -39,15 +40,22 @@ namespace overDeRhein.Data.Models
         public string Observations { get; set; }
         public int OperatingHours { get; set; }
         [StringLength(500)]
-        public int DiscardReason { get; set; }
+        public string DiscardReason { get; set; }
 
 
         // ============================== foreigners ==============================
+        // FK
         public int UserID { get; set; }
         public Users User { get; set; }
         public int CoverPageStatusID { get; set; }
         public CoverPageStatus CoverPageStatus { get; set; }
         public int SignatureID { get; set; }
         public Signatures Signatures { get; set; }
+        public int CoverPageTypeID { get; set; }
+        public CoverPageType CoverPageType { get; set; }
+
+        // PK
+        public CableChecklists CableChecklists { get; set; }
+        public LiftingTests LiftingTests { get; set; }
     }
 }
