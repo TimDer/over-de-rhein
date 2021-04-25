@@ -262,12 +262,12 @@ namespace overDeRhein.Migrations
             migrationBuilder.InsertData(
                 table: "CoverPages",
                 columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "SignatureID", "SignaturesID", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
-                values: new object[] { 1, (byte)1, 6.0, "hfdsf", "Hello world", 6.0, 1, 1, "owreuityert", "Broken", "hjg", 4378, "ksgfskdajf", 5, new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 6.0, "hello it is me", 5, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "dkshjfgfh", 5, 234, 6.0, (byte)1, (byte)1, 2, "dskgf" });
+                values: new object[] { 1, (byte)1, 6.0, "hfdsf", "Hello world", 6.0, 1, 1, "owreuityert", "Broken", "hjg", 4378, "ksgfskdajf", 5, new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 6.0, "hello it is me", 5, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "dkshjfgfh", 1, 234, 6.0, (byte)1, (byte)1, 2, "dskgf" });
 
             migrationBuilder.InsertData(
                 table: "CoverPages",
                 columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "SignatureID", "SignaturesID", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
-                values: new object[] { 2, (byte)1, 7.0, "hfdsf", "Hello world", 7.0, 1, 1, "zsngfye", "Broken", "hre78v", 657, "dsjbvjkdb", 6, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 7.0, "hello it is not me", 6, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "ouirehjbgf", 6, 234, 7.0, (byte)1, (byte)1, 2, "dskghkgf" });
+                values: new object[] { 2, (byte)1, 7.0, "hfdsf", "Hello world", 7.0, 1, 2, "zsngfye", "Broken", "hre78v", 657, "dsjbvjkdb", 6, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 7.0, "hello it is not me", 6, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "ouirehjbgf", 2, 234, 7.0, (byte)1, (byte)1, 2, "dskghkgf" });
 
             migrationBuilder.InsertData(
                 table: "CableChecklists",

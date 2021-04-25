@@ -10,7 +10,7 @@ using overDeRhein.Data;
 namespace overDeRhein.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210421140246_DBInit")]
+    [Migration("20210425132715_DBInit")]
     partial class DBInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -283,7 +283,7 @@ namespace overDeRhein.Migrations
                             SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SignatureID = 0,
                             Specialist = "dkshjfgfh",
-                            StampsType = 5,
+                            StampsType = 1,
                             TCVTNumber = 234,
                             TelescopicBoomParts = 6.0,
                             Topable = (byte)1,
@@ -300,7 +300,7 @@ namespace overDeRhein.Migrations
                             CableSupplier = "Hello world",
                             ConstructionBoomMeters = 7.0,
                             CoverPageStatusID = 1,
-                            CoverPageTypeID = 1,
+                            CoverPageTypeID = 2,
                             CrainSetup = "zsngfye",
                             DiscardReason = "Broken",
                             Elucidation = "hre78v",
@@ -315,7 +315,7 @@ namespace overDeRhein.Migrations
                             SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SignatureID = 0,
                             Specialist = "ouirehjbgf",
-                            StampsType = 6,
+                            StampsType = 2,
                             TCVTNumber = 234,
                             TelescopicBoomParts = 7.0,
                             Topable = (byte)1,

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,18 +32,14 @@ namespace overDeRhein.Controllers
             return View("CoverPage", statusModel.ViewModel);
         }
 
-        public IActionResult Edit(int id1, string id2)
+        public IActionResult Edit(string type, int edit)
         {
-            //int edit, string type
-            int edit = id1;
-            string type = id2;
-
-            return View("EditAdd");
+            return View("EditAdd", new CoverPageEditAddViewModel(_AppDbContext, type, "edit", edit));
         }
 
-        public IActionResult Add()
+        public IActionResult Add(string type)
         {
-            return View("EditAdd");
+            return View("EditAdd", new CoverPageEditAddViewModel(_AppDbContext, type, "add"));
         }
     }
 }

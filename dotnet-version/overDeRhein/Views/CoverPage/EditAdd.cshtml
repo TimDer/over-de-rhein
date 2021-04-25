@@ -1,1 +1,126 @@
-Hallo ik ben Edit
+@model overDeRhein.ViewModels.CoverPageEditAddViewModel;
+
+<a href="/" class="btn btn-primary coverPages">Terug naar overzigt</a>
+
+<div class="content-container">
+    <form asp-controller="CoverPagesSubmit" asp-action="@Model.AddOrEdit" asp-route-type="@Model.Type" method="POST">
+        <div class="row">
+            <div class="col-lg">
+                <p><label for="#">TCVT Nummer</label> <input type="number" min="0" class="form-control" name="TCVTNumber" value="@Model.CoverPage.TCVTNumber"></p>
+                <p><label for="#">Keuringsdatum</label> <input type="date" class="form-control" name="inspectionDate" value="@Model.InspectionDate"></p>
+                <p><label for="#">Uitvoerder</label> <input type="text" class="form-control" name="executor" value="@Model.CoverPage.Executor"></p>
+                <p><label for="#">Deskundige</label> <input type="text" class="form-control" name="specialist" value="@Model.CoverPage.Specialist"></p>
+                <p><label for="#">Opstelling kraan</label> <input type="text" class="form-control" name="crainSetup" value="@Model.CoverPage.CrainSetup"></p>
+                <p><label for="#">Uitvoering toren haakhoogte</label> <input type="number" min="0" name="executionTowerHookHeight" class="form-control" value="@Model.CoverPage.ExecutionTowerHookHeight"></p>
+                <p><label for="#">Soort giek</label> <input type="text" class="form-control" name="boomType" value="@Model.CoverPage.BoomType"></p>
+                <p><label for="#">Teleskoopgiek delen</label> <input type="number" class="form-control" name="telescopicBoomParts" value="@Model.CoverPage.TelescopicBoomParts"></p>
+                <p><label for="#">Opbouwgiek meters</label> <input type="number" class="form-control" name="constructionBoomMeters" value="@Model.CoverPage.ConstructionBoomMeters"></p>
+                <p><label for="#">hulpgiek meters</label> <input type="number" class="form-control" name="jibBoomMeters" value="@Model.CoverPage.JibBoomMeters"></p>
+                <p><label for="#">Fly jib delen</label> <input type="number" class="form-control" name="flyJibParts" value="@Model.CoverPage.FlyJibParts"></p>
+                <p><label for="#">Gieklengte</label> <input type="number" class="form-control" name="BoomLength" value="@Model.CoverPage.BoomLength"></p>
+
+
+                <p>
+                    <label for="#">Soort stempels</label>
+                    <select name="stampsType" class="form-control">
+                        <option value="1" selected="@(Model.CoverPage.StampsType == 1)">Stempels</option>
+                        <option value="2" selected="@(Model.CoverPage.StampsType == 2)">Doozerblad</option>
+                    </select>
+                </p>
+            </div>
+            <div class="col-lg">
+                <div class="row">
+                    <div class="col-lg">
+                        <p><label for="#">Topbaar</label> <input type="checkbox" class="form-control" name="topable" @Model.Topable></p>
+                    </div>
+                    <div class="col-lg">
+                        <p><label for="#">Loopkat</label> <input type="checkbox" class="form-control" name="trolley" @Model.Trolley></p>
+                    </div>
+                    <div class="col-lg">
+                    <p><label for="#">Verstelbare giek</label> <input type="checkbox" class="form-control" name="adjustableBoom" @Model.AdjustableBoom></p>
+                    </div>
+                </div>
+                <p>
+                    <label for="#">Tekortkomingen</label>
+                    <div class="row">
+                        <div class="col">
+                            <p>Ja: <input type="radio" name="shortcomings" class="form-control" value="1" @Model.Shortcomings_yes></p>
+                        </div>
+                        <div class="col">
+                            <p>Nee: <input type="radio" name="shortcomings" class="form-control" value="0" @Model.Shortcomings_no></p>
+                        </div>
+                    </div>
+                </p>
+                <p><label for="#">Afgemeeld voor</label> <input type="date" class="form-control" name="signOutBefore" value="@Model.SignOutBefore"></p>
+                <p>
+                    <label for="#">Toelichting</label>
+                    <textarea name="elucidation" class="form-control elucidation">@Model.CoverPage.Elucidation</textarea>
+                </p>
+                <p><label for="#">Werkinstructie</label> <input type="text" class="form-control" name="workInstruction" value="@Model.CoverPage.WorkInstruction"></p>
+                <p><label for="#">Kabelleverancier</label> <input type="text" class="form-control" name="cableSupplier" value="@Model.CoverPage.CableSupplier"></p>
+                <p><label for="#">Waarmemingen</label> <input type="text" class="form-control" name="observations" value="@Model.CoverPage.Observations"></p>
+                <p></p>
+                <p><label for="#">Aantal bedrijfsuren</label> <input type="number" min="0" class="form-control" name="operatingHours" value="@Model.CoverPage.OperatingHours"></p>
+                <p><label for="#">Aflef redenen</label> <input type="text" class="form-control" name="discardReason" value="@Model.CoverPage.DiscardReason"></p>
+                <p>
+                    <label for="#">Status</label>
+                    <select name="coverPageStatusID" class="form-control">
+                        @foreach (var coverPageStatus in Model.CoverPageStatus)
+                        {
+                            <option value="@coverPageStatus.CoverPageStatusID" selected="@(coverPageStatus.CoverPageStatusID == Model.CoverPage.CoverPageStatusID)">
+                                @coverPageStatus.StatusType
+                            </option>
+                        }
+                    </select>
+                </p>
+                
+
+                <input type="hidden" name="coverPagesID" value="@Model.CoverPage.CoverPagesID">
+            </div>
+        </div>
+
+        <hr>
+
+        @switch (Model.Type)
+        {
+            case "Hijs-testen":
+                <div class="row">
+                    <div class="col-lg">
+                        <p><label for="">Datum opgesteld</label> <input type="date" name="dateDrawn" min="0" max="99" class="form-control" value='@Model.CoverPage.LiftingTests.DateDrawn.Date.ToString("yyyy-MM-dd")'></p>
+                        <p><label for="">Hoofdgiek lengte</label> <input type="number" name="mainBoomLength" min="0" max="99" class="form-control" value="@Model.CoverPage.LiftingTests.MainBoomLength"></p>
+                        <p><label for="">Mech sectie gieklengte</label> <input type="number" min="0" max="99" name="mechSectionBoomLength" class="form-control" value="@Model.CoverPage.LiftingTests.MechSectionBoomLength"></p>
+                        <p><label for="">Hulpgiek lengte</label> <input type="number" min="0" max="99" name="auxiliaryBoomLength" class="form-control" value="@Model.CoverPage.LiftingTests.AuxiliaryBoomLength"></p>
+                        <p><label for="">Hoofdgiek giekhoek</label> <input type="number" min="0" max="99" name="jibBoomLength" class="form-control" value="@Model.CoverPage.LiftingTests.JibBoomLength"></p>
+                        <p><label for="">Heiskabel aantal parten</label> <input type="number" min="0" name="hoistingCablePartsAmount" class="form-control" value="@Model.CoverPage.LiftingTests.HoistingCablePartsAmount"></p>
+                    </div>
+                    <div class="col-lg">
+                        <p><label for="">Zwenkhoek</label> <input type="number" min="0" max="99" name="swingAngle" class="form-control" value="@Model.CoverPage.LiftingTests.SwingAngle"></p>
+                        <p><label for="">Eigen massa balast</label> <input type="number" name="ownMassBallast" min="0" max="99" class="form-control" value="@Model.CoverPage.LiftingTests.OwnMassBallast"></p>
+                        <p><label for="">Toelaatbare bedrijfslast</label> <input type="number" name="permissibleOperatingLoad" min="0" max="99" class="form-control" value="@Model.CoverPage.LiftingTests.PermissibleOperatingLoad"></p>
+                        <p><label for="">LMB in werking</label> <input type="number" name="lbmInEffect" min="0" max="99" class="form-control" value="@Model.CoverPage.LiftingTests.LbmInEffect"></p>
+                        <p><label for="">Proeflast</label> <input type="number" name="testLoad" min="0" max="99" class="form-control" value="@Model.CoverPage.LiftingTests.TestLoad"></p>
+                        <p><label for="">Akkoord</label> <input type="checkbox" name="Agreed" class="form-control" @Model.AgreedHijsTesten></p>
+                    </div>
+                </div>
+                break;
+            default:
+                <div class="row">
+                    <div class="col-lg">
+                        <p><label for="">Draadbreuk 6 dagen</label> <input type="number" name="cableDamage_6D" class="form-control" value="@Model.CoverPage.CableChecklists.CableDamage_6D"></p>
+                        <p><label for="">Draadbreuk 30 dagen</label> <input type="number" name="cableDamage_30D" class="form-control" value="@Model.CoverPage.CableChecklists.CableDamage_30D"></p>
+                        <p><label for="">Beschadiging buitenzijde</label> <input type="number" name="outsideCableDamage" class="form-control" value="@Model.CoverPage.CableChecklists.OutsideCableDamage"></p>
+                        <p><label for="">Beschadiging roest corrosie</label> <input type="number" name="rust" class="form-control" value="@Model.CoverPage.CableChecklists.Rust"></p>
+                    </div>
+                    <div class="col-lg">
+                        <p><label for="">Verminderde kabeldiameter</label> <input type="number" name="reducedCableDiameter" class="form-control" value="@Model.CoverPage.CableChecklists.ReducedCableDiameter"></p>
+                        <p><label for="">Positie meetpunten</label> <input type="number" name="measuringPoints" class="form-control" value="@Model.CoverPage.CableChecklists.MeasuringPoints"></p>
+                        <p><label for="">Beschadiging totaal</label> <input type="number" name="totalDamage" class="form-control" value="@Model.CoverPage.CableChecklists.TotalDamage"></p>
+                        <p><label for="">Type Beschadiging roest</label> <input type="number" name="damageRustType" class="form-control" value="@Model.CoverPage.CableChecklists.DamageRustType"></p>
+                    </div>
+                </div>
+                break;
+        }
+
+        <input type="submit" value="Opslaan" class="btn btn-success btn-block">
+    </form>
+</div>
