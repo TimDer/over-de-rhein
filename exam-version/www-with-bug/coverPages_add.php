@@ -88,7 +88,7 @@ if (isset($_SESSION["user_id"])) {
                     <p><label for="#">Uitvoerder</label> <input type="text" class="form-control" name="executor" value="<?php echo $executor; ?>"></p>
                     <p><label for="#">Deskundige</label> <input type="text" class="form-control" name="specialist" value="<?php echo $specialist; ?>"></p>
                     <p><label for="#">Opstelling kraan</label> <input type="text" class="form-control" name="crainSetup" value="<?php echo $crainSetup; ?>"></p>
-                    <p><label for="#">Uitvoering toren haakhoogte</label> <input type="text" name="executionTowerHookHeight" class="form-control" value="<?php echo $executionTowerHookHeight; ?>"></p>
+                    <p><label for="#">Uitvoering toren haakhoogte</label> <input type="number" min="0" name="executionTowerHookHeight" class="form-control" value="<?php echo $executionTowerHookHeight; ?>"></p>
                     <p><label for="#">Soort giek</label> <input type="text" class="form-control" name="boomType" value="<?php echo $boomType; ?>"></p>
                     <p><label for="#">Teleskoopgiek delen</label> <input type="number" class="form-control" name="telescopicBoomParts" value="<?php echo $telescopicBoomParts; ?>"></p>
                     <p><label for="#">Opbouwgiek meters</label> <input type="number" class="form-control" name="constructionBoomMeters" value="<?php echo $constructionBoomMeters; ?>"></p>
