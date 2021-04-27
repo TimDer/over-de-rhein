@@ -45,17 +45,17 @@ namespace overDeRhein.Data.Models
 
         // ============================== foreigners ==============================
         // FK
+        #nullable enable
         public int UserID { get; set; }
-        public Users User { get; set; }
+        public Users? User { get; set; }
         public int CoverPageStatusID { get; set; }
-        public CoverPageStatus CoverPageStatus { get; set; }
-        public int SignatureID { get; set; }
-        public Signatures Signatures { get; set; }
+        public CoverPageStatus? CoverPageStatus { get; set; }
         public int CoverPageTypeID { get; set; }
-        public CoverPageType CoverPageType { get; set; }
+        public CoverPageType? CoverPageType { get; set; }
 
         // PK
-        public CableChecklists CableChecklists { get; set; }
-        public LiftingTests LiftingTests { get; set; }
+        public CableChecklists? CableChecklists { get; set; }
+        public LiftingTests? LiftingTests { get; set; }
+        #nullable disable
     }
 }

@@ -212,12 +212,6 @@ namespace overDeRhein.Migrations
                     b.Property<DateTime>("SignOutBefore")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SignatureID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignaturesID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Specialist")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -250,8 +244,6 @@ namespace overDeRhein.Migrations
 
                     b.HasIndex("CoverPageTypeID");
 
-                    b.HasIndex("SignaturesID");
-
                     b.HasIndex("UserID");
 
                     b.ToTable("CoverPages");
@@ -279,7 +271,6 @@ namespace overDeRhein.Migrations
                             OperatingHours = 5,
                             Shortcomings = (byte)0,
                             SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SignatureID = 0,
                             Specialist = "dkshjfgfh",
                             StampsType = 1,
                             TCVTNumber = 234,
@@ -311,7 +302,6 @@ namespace overDeRhein.Migrations
                             OperatingHours = 6,
                             Shortcomings = (byte)0,
                             SignOutBefore = new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SignatureID = 0,
                             Specialist = "ouirehjbgf",
                             StampsType = 2,
                             TCVTNumber = 234,
@@ -403,22 +393,6 @@ namespace overDeRhein.Migrations
                             TestLoad = 44.0,
                             UserID = 2
                         });
-                });
-
-            modelBuilder.Entity("overDeRhein.Data.Models.Signatures", b =>
-                {
-                    b.Property<int>("SignaturesID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Signature")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("SignaturesID");
-
-                    b.ToTable("Signatures");
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.UserType", b =>
@@ -536,10 +510,6 @@ namespace overDeRhein.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("overDeRhein.Data.Models.Signatures", "Signatures")
-                        .WithMany("CoverPages")
-                        .HasForeignKey("SignaturesID");
-
                     b.HasOne("overDeRhein.Data.Models.Users", "User")
                         .WithMany("CoverPages")
                         .HasForeignKey("UserID")
@@ -549,8 +519,6 @@ namespace overDeRhein.Migrations
                     b.Navigation("CoverPageStatus");
 
                     b.Navigation("CoverPageType");
-
-                    b.Navigation("Signatures");
 
                     b.Navigation("User");
                 });
@@ -598,11 +566,6 @@ namespace overDeRhein.Migrations
                     b.Navigation("CableChecklists");
 
                     b.Navigation("LiftingTests");
-                });
-
-            modelBuilder.Entity("overDeRhein.Data.Models.Signatures", b =>
-                {
-                    b.Navigation("CoverPages");
                 });
 
             modelBuilder.Entity("overDeRhein.Data.Models.UserType", b =>

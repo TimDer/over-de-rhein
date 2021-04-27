@@ -14,8 +14,13 @@ namespace overDeRhein.Data.Models
 
 
         // ============================== foreigners ==============================
-        public int UserTypeID { get; set; }
-        public UserType UserType { get; set; }
-        public List<CoverPages> CoverPages { get; set; }
+        #nullable enable
+        // FK
+        public int? UserTypeID { get; set; }
+        public UserType? UserType { get; set; }
+
+        // PK
+        public List<CoverPages>? CoverPages { get; set; }
+        #nullable disable
     }
 }

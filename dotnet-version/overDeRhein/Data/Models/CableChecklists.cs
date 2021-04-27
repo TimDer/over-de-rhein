@@ -17,11 +17,13 @@ namespace overDeRhein.Data.Models
 
 
         // ============================== foreigners ==============================
-        public int CoverPagesID { get; set; }
-        public CoverPages CoverPage { get; set; }
+        #nullable enable
+        public int? CoverPagesID { get; set; }
+        public CoverPages? CoverPage { get; set; }
 
         // user table
-        public int UserID { get; set; }
-        public Users Users { get; set; }
+        public int? UserID { get; set; }
+        public Users? Users { get; set; }
+        #nullable disable
     }
 }

@@ -12,6 +12,8 @@ namespace overDeRhein.Data.Models
 
 
         // ============================== foreigners ==============================
-        public List<Users> Users { get; set; }
+        #nullable enable
+        public List<Users>? Users { get; set; }
+        #nullable disable
     }
 }

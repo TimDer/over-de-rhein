@@ -9,6 +9,7 @@ using overDeRhein.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 
 namespace overDeRhein.Controllers
 {
@@ -42,6 +43,7 @@ namespace overDeRhein.Controllers
                 {
                     var claims = new List<Claim>
                     {
+                        new Claim(ClaimTypes.NameIdentifier, query.UserID.ToString()),
                         new Claim(ClaimTypes.Name, query.UserName)
                     };
 

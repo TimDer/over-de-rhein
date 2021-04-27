@@ -11,6 +11,8 @@ namespace overDeRhein.Data.Models
         public string Type { get; set; }
 
         // ============================== foreigners ==============================
-        public List<CoverPages> CoverPages { get; set; }
+        #nullable enable
+        public List<CoverPages>? CoverPages { get; set; }
+        #nullable disable
     }
 }

@@ -34,19 +34,6 @@ namespace overDeRhein.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Signatures",
-                columns: table => new
-                {
-                    SignaturesID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Signature = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Signatures", x => x.SignaturesID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserType",
                 columns: table => new
                 {
@@ -112,8 +99,6 @@ namespace overDeRhein.Migrations
                     DiscardReason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     CoverPageStatusID = table.Column<int>(type: "int", nullable: false),
-                    SignatureID = table.Column<int>(type: "int", nullable: false),
-                    SignaturesID = table.Column<int>(type: "int", nullable: true),
                     CoverPageTypeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -131,12 +116,6 @@ namespace overDeRhein.Migrations
                         principalTable: "CoverPageType",
                         principalColumn: "CoverPageTypeID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CoverPages_Signatures_SignaturesID",
-                        column: x => x.SignaturesID,
-                        principalTable: "Signatures",
-                        principalColumn: "SignaturesID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CoverPages_Users_UserID",
                         column: x => x.UserID,
@@ -261,13 +240,13 @@ namespace overDeRhein.Migrations
 
             migrationBuilder.InsertData(
                 table: "CoverPages",
-                columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "SignatureID", "SignaturesID", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
-                values: new object[] { 1, (byte)1, 6.0, "hfdsf", "Hello world", 6.0, 1, 1, "owreuityert", "Broken", "hjg", 4378, "ksgfskdajf", 5, new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 6.0, "hello it is me", 5, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "dkshjfgfh", 1, 234, 6.0, (byte)1, (byte)1, 2, "dskgf" });
+                columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
+                values: new object[] { 1, (byte)1, 6.0, "hfdsf", "Hello world", 6.0, 1, 1, "owreuityert", "Broken", "hjg", 4378, "ksgfskdajf", 5, new DateTime(2021, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 6.0, "hello it is me", 5, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "dkshjfgfh", 1, 234, 6.0, (byte)1, (byte)1, 2, "dskgf" });
 
             migrationBuilder.InsertData(
                 table: "CoverPages",
-                columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "SignatureID", "SignaturesID", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
-                values: new object[] { 2, (byte)1, 7.0, "hfdsf", "Hello world", 7.0, 1, 2, "zsngfye", "Broken", "hre78v", 657, "dsjbvjkdb", 6, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 7.0, "hello it is not me", 6, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, null, "ouirehjbgf", 2, 234, 7.0, (byte)1, (byte)1, 2, "dskghkgf" });
+                columns: new[] { "CoverPagesID", "AdjustableBoom", "BoomLength", "BoomType", "CableSupplier", "ConstructionBoomMeters", "CoverPageStatusID", "CoverPageTypeID", "CrainSetup", "DiscardReason", "Elucidation", "ExecutionTowerHookHeight", "Executor", "FlyJibParts", "InspectionDate", "JibBoomMeters", "Observations", "OperatingHours", "Shortcomings", "SignOutBefore", "Specialist", "StampsType", "TCVTNumber", "TelescopicBoomParts", "Topable", "Trolley", "UserID", "WorkInstruction" },
+                values: new object[] { 2, (byte)1, 7.0, "hfdsf", "Hello world", 7.0, 1, 2, "zsngfye", "Broken", "hre78v", 657, "dsjbvjkdb", 6, new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 7.0, "hello it is not me", 6, (byte)0, new DateTime(2021, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "ouirehjbgf", 2, 234, 7.0, (byte)1, (byte)1, 2, "dskghkgf" });
 
             migrationBuilder.InsertData(
                 table: "CableChecklists",
@@ -299,11 +278,6 @@ namespace overDeRhein.Migrations
                 name: "IX_CoverPages_CoverPageTypeID",
                 table: "CoverPages",
                 column: "CoverPageTypeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CoverPages_SignaturesID",
-                table: "CoverPages",
-                column: "SignaturesID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CoverPages_UserID",
@@ -343,9 +317,6 @@ namespace overDeRhein.Migrations
 
             migrationBuilder.DropTable(
                 name: "CoverPageType");
-
-            migrationBuilder.DropTable(
-                name: "Signatures");
 
             migrationBuilder.DropTable(
                 name: "Users");
