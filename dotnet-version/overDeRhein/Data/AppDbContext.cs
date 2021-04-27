@@ -18,7 +18,6 @@ namespace overDeRhein.Data
         public DbSet<CoverPages> CoverPages { get; set; }
         public DbSet<CoverPageStatus> CoverPageStatus { get; set; }
         public DbSet<LiftingTests> LiftingTests { get; set; }
-        public DbSet<Signatures> Signatures { get; set; }
         public DbSet<CoverPageType> CoverPageType { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<UserType> UserType { get; set; }
