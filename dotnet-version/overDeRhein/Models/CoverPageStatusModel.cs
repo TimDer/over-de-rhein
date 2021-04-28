@@ -23,6 +23,7 @@ namespace overDeRhein.Models
                     .Include(c => c.CoverPageStatus)
                     .Include(c => c.CoverPageType)
                     .Where(c => c.CoverPageStatus.StatusType == statusType)
+                    .OrderByDescending(c => c.CoverPagesID)
                     .ToList<CoverPages>(),
                 CoverPageType = _AppDbContext.CoverPageType.ToList<CoverPageType>()
             };
