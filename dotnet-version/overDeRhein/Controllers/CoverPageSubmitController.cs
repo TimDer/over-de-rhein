@@ -34,22 +34,6 @@ namespace overDeRhein.Controllers
             coverPageSubmitEditModel.GetData();
             coverPageSubmitEditModel.UpdateData();
 
-            /*string subTable = (type == "Hijs-testen") ? nameof(CoverPage.LiftingTests) : nameof(CoverPage.CableChecklists);
-
-            CoverPages coverPageOld = _AppDbContext.CoverPages
-                .Include(subTable)
-                .Where(c => c.CoverPagesID == CoverPage.CoverPagesID)
-                .FirstOrDefault();
-
-            if (coverPageOld is CoverPages)
-            {
-                int oldUserId       = coverPageOld.UserID;
-                int CoverPageTypeID = coverPageOld.CoverPageTypeID;
-
-                if (type == "Hijs-testen")
-                {}
-            }*/
-
             return RedirectToAction("Index", "CoverPage");
         }
 
