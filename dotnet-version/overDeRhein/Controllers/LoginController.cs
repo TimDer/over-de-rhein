@@ -24,9 +24,9 @@ namespace overDeRhein.Controllers
             _Cryptography = cryptography;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery] Login FromQuery)
         {
-            return View();
+            return View(FromQuery);
         }
 
         public IActionResult set([FromForm] Login formData)
@@ -57,16 +57,10 @@ namespace overDeRhein.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProp);
+                }
+            }
 
-                    return Redirect("/");
-                }
-                else {
-                    return RedirectToAction("Index");
-                }
-            }
-            else {
-                return RedirectToAction("Index");
-            }
+            return Redirect((formData.ReturnUrl == null) ? "/" : formData.ReturnUrl);
         }
 
         [Authorize]
