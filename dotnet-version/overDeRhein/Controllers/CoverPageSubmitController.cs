@@ -32,9 +32,9 @@ namespace overDeRhein.Controllers
                 cableChecklists
             );
             coverPageSubmitEditModel.GetData();
-            coverPageSubmitEditModel.UpdateData();
+            bool ifHasNoError = coverPageSubmitEditModel.UpdateData();
 
-            return RedirectToAction("Index", "CoverPage");
+            return (ifHasNoError) ? RedirectToAction("Index", "CoverPage") : RedirectToAction("Error", "Home");
         }
 
         [HttpPost]
@@ -62,11 +62,17 @@ namespace overDeRhein.Controllers
 
             coverPage.UserID = userId;
 
-            _AppDbContext.CoverPages.Add(coverPage);
+            bool ifHasError = false;
+            try {
+                _AppDbContext.CoverPages.Add(coverPage);
 
-            _AppDbContext.SaveChanges();
+                _AppDbContext.SaveChanges();
+            }
+            catch {
+                ifHasError = true;
+            }
 
-            return RedirectToAction("Index", "CoverPage");
+            return (ifHasError) ? RedirectToAction("Error", "Home") : RedirectToAction("Index", "CoverPage");
         }
     }
 }

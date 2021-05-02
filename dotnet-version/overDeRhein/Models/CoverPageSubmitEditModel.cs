@@ -42,7 +42,7 @@ namespace overDeRhein.Models
                 .FirstOrDefault();
         }
 
-        public void UpdateData()
+        public bool UpdateData()
         {
             if (CoverPagesDb is CoverPages)
             {
@@ -61,6 +61,11 @@ namespace overDeRhein.Models
                 }
 
                 AppDbContext.SaveChanges();
+
+                return true;
+            }
+            else {
+                return false;
             }
         }
 
