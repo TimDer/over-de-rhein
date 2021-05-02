@@ -32,23 +32,28 @@ namespace overDeRhein.Data
             // UserType table
             modelBuilder.Entity<UserType>().HasData(new UserType {
                 UserTypeID = 1,
-                Type = "Directie"
+                Type = "Directie",
+                Role = 0
             });
             modelBuilder.Entity<UserType>().HasData(new UserType {
                 UserTypeID = 2,
-                Type = "Veiligheid en milieu"
+                Type = "Veiligheid en milieu",
+                Role = 0
             });
             modelBuilder.Entity<UserType>().HasData(new UserType {
                 UserTypeID = 3,
-                Type = "Materieel"
+                Type = "Materieel",
+                Role = 0
             });
             modelBuilder.Entity<UserType>().HasData(new UserType {
                 UserTypeID = 4,
-                Type = "Projectbureau"
+                Type = "Projectbureau",
+                Role = 0
             });
             modelBuilder.Entity<UserType>().HasData(new UserType {
                 UserTypeID = 5,
-                Type = "admin"
+                Type = "admin",
+                Role = 1
             });
 
             // Users table

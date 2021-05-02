@@ -9,6 +9,7 @@ namespace overDeRhein.Data.Models
         public int UserTypeID { get; set; }
         [StringLength(50)]
         public string Type { get; set; }
+        public byte Role { get; set; }
 
 
         // ============================== foreigners ==============================

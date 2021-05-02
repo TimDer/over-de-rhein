@@ -24,6 +24,7 @@ namespace overDeRhein
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
                     options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/";
                 });
 
             services.AddSingleton<AppDbContext, AppDbContext>();

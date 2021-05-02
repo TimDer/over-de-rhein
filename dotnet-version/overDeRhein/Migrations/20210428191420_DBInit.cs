@@ -39,7 +39,8 @@ namespace overDeRhein.Migrations
                 {
                     UserTypeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Role = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,7 +55,7 @@ namespace overDeRhein.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Password = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    UserTypeID = table.Column<int>(type: "int", nullable: false)
+                    UserTypeID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -64,7 +65,7 @@ namespace overDeRhein.Migrations
                         column: x => x.UserTypeID,
                         principalTable: "UserType",
                         principalColumn: "UserTypeID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,8 +139,8 @@ namespace overDeRhein.Migrations
                     MeasuringPoints = table.Column<int>(type: "int", nullable: false),
                     TotalDamage = table.Column<int>(type: "int", nullable: false),
                     DamageRustType = table.Column<int>(type: "int", nullable: false),
-                    CoverPagesID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
+                    CoverPagesID = table.Column<int>(type: "int", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: true),
                     UsersUserID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -150,7 +151,7 @@ namespace overDeRhein.Migrations
                         column: x => x.CoverPagesID,
                         principalTable: "CoverPages",
                         principalColumn: "CoverPagesID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CableChecklists_Users_UsersUserID",
                         column: x => x.UsersUserID,
@@ -177,8 +178,8 @@ namespace overDeRhein.Migrations
                     LbmInEffect = table.Column<double>(type: "float", nullable: false),
                     TestLoad = table.Column<double>(type: "float", nullable: false),
                     Agreed = table.Column<byte>(type: "tinyint", nullable: false),
-                    CoverPagesID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
+                    CoverPagesID = table.Column<int>(type: "int", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: true),
                     UsersUserID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -189,7 +190,7 @@ namespace overDeRhein.Migrations
                         column: x => x.CoverPagesID,
                         principalTable: "CoverPages",
                         principalColumn: "CoverPagesID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_LiftingTests_Users_UsersUserID",
                         column: x => x.UsersUserID,
@@ -218,14 +219,14 @@ namespace overDeRhein.Migrations
 
             migrationBuilder.InsertData(
                 table: "UserType",
-                columns: new[] { "UserTypeID", "Type" },
+                columns: new[] { "UserTypeID", "Role", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Directie" },
-                    { 2, "Veiligheid en milieu" },
-                    { 3, "Materieel" },
-                    { 4, "Projectbureau" },
-                    { 5, "admin" }
+                    { 1, (byte)0, "Directie" },
+                    { 2, (byte)0, "Veiligheid en milieu" },
+                    { 3, (byte)0, "Materieel" },
+                    { 4, (byte)0, "Projectbureau" },
+                    { 5, (byte)1, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,7 +263,8 @@ namespace overDeRhein.Migrations
                 name: "IX_CableChecklists_CoverPagesID",
                 table: "CableChecklists",
                 column: "CoverPagesID",
-                unique: true);
+                unique: true,
+                filter: "[CoverPagesID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CableChecklists_UsersUserID",
@@ -288,7 +290,8 @@ namespace overDeRhein.Migrations
                 name: "IX_LiftingTests_CoverPagesID",
                 table: "LiftingTests",
                 column: "CoverPagesID",
-                unique: true);
+                unique: true,
+                filter: "[CoverPagesID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LiftingTests_UsersUserID",

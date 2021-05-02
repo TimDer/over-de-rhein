@@ -1,0 +1,52 @@
+@model overDeRhein.ViewModels.AdminEditAddViewModel;
+
+<a asp-controller="Admin" asp-action="Index" class="btn btn-primary coverPages">Admin Sectie</a>
+    
+<div class="content-container">
+    <form asp-controller="AdminSubmit" asp-action="@Model.EditAdd" method="post">
+        <div class="row">
+            <div class="col-lg">
+                <p>
+                    <label for="@nameof(Model.UserName)">Gebruikersnaam:</label>
+                    <input type="text"
+                            class="form-control"
+                            name="@nameof(Model.UserName)"
+                            id="@nameof(Model.UserName)"
+                            value="@Model.UserName">
+                </p>
+                <p>
+                    <label>Gebruikerstype:</label>
+                    <select class="form-control" name="@nameof(Model.UserTypeID)">
+                        @foreach (var userType in Model.UserType)
+                        {
+                            <option value="@userType.UserTypeID" selected="@(Model.UserTypeID == userType.UserTypeID)">
+                                @userType.Type
+                            </option>
+                        }
+                    </select>
+                </p>
+            </div>
+            <div class="col-lg">
+                <p>
+                    <label for="@nameof(Model.Password)">Wachtwoord</label>
+                    <input type="password"
+                            class="form-control"
+                            id="@nameof(Model.Password)"
+                            name="@nameof(Model.Password)">
+                </p>
+                <p>
+                    <label for="@nameof(Model.PasswordRepeat)">Herhaal het wachtwoord</label>
+                    <input type="password"
+                            class="form-control"
+                            id="@nameof(Model.PasswordRepeat)"
+                            name="@nameof(Model.PasswordRepeat)">
+                </p>
+            </div>
+        </div>
+        @if (Model.EditAdd != "Add")
+        {
+            <input type="hidden" name="@nameof(Model.UserID)" value="@Model.UserID">
+        }
+        <input type="submit" value="Opslaan" class="btn btn-success btn-block">
+    </form>
+</div>

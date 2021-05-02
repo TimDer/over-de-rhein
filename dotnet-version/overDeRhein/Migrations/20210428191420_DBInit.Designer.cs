@@ -10,7 +10,7 @@ using overDeRhein.Data;
 namespace overDeRhein.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210427140926_DBInit")]
+    [Migration("20210428191420_DBInit")]
     partial class DBInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace overDeRhein.Migrations
                     b.Property<int>("CableDamage_6D")
                         .HasColumnType("int");
 
-                    b.Property<int>("CoverPagesID")
+                    b.Property<int?>("CoverPagesID")
                         .HasColumnType("int");
 
                     b.Property<int>("DamageRustType")
@@ -55,7 +55,7 @@ namespace overDeRhein.Migrations
                     b.Property<int>("TotalDamage")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserID")
+                    b.Property<int?>("UserID")
                         .HasColumnType("int");
 
                     b.Property<int?>("UsersUserID")
@@ -64,7 +64,8 @@ namespace overDeRhein.Migrations
                     b.HasKey("CableChecklistsID");
 
                     b.HasIndex("CoverPagesID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CoverPagesID] IS NOT NULL");
 
                     b.HasIndex("UsersUserID");
 
@@ -328,7 +329,7 @@ namespace overDeRhein.Migrations
                     b.Property<double>("AuxiliaryBoomLength")
                         .HasColumnType("float");
 
-                    b.Property<int>("CoverPagesID")
+                    b.Property<int?>("CoverPagesID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateDrawn")
@@ -361,7 +362,7 @@ namespace overDeRhein.Migrations
                     b.Property<double>("TestLoad")
                         .HasColumnType("float");
 
-                    b.Property<int>("UserID")
+                    b.Property<int?>("UserID")
                         .HasColumnType("int");
 
                     b.Property<int?>("UsersUserID")
@@ -370,7 +371,8 @@ namespace overDeRhein.Migrations
                     b.HasKey("LiftingTestsID");
 
                     b.HasIndex("CoverPagesID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CoverPagesID] IS NOT NULL");
 
                     b.HasIndex("UsersUserID");
 
@@ -404,6 +406,9 @@ namespace overDeRhein.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte>("Role")
+                        .HasColumnType("tinyint");
+
                     b.Property<string>("Type")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -416,26 +421,31 @@ namespace overDeRhein.Migrations
                         new
                         {
                             UserTypeID = 1,
+                            Role = (byte)0,
                             Type = "Directie"
                         },
                         new
                         {
                             UserTypeID = 2,
+                            Role = (byte)0,
                             Type = "Veiligheid en milieu"
                         },
                         new
                         {
                             UserTypeID = 3,
+                            Role = (byte)0,
                             Type = "Materieel"
                         },
                         new
                         {
                             UserTypeID = 4,
+                            Role = (byte)0,
                             Type = "Projectbureau"
                         },
                         new
                         {
                             UserTypeID = 5,
+                            Role = (byte)1,
                             Type = "admin"
                         });
                 });
@@ -455,7 +465,7 @@ namespace overDeRhein.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UserTypeID")
+                    b.Property<int?>("UserTypeID")
                         .HasColumnType("int");
 
                     b.HasKey("UserID");
@@ -485,9 +495,7 @@ namespace overDeRhein.Migrations
                 {
                     b.HasOne("overDeRhein.Data.Models.CoverPages", "CoverPage")
                         .WithOne("CableChecklists")
-                        .HasForeignKey("overDeRhein.Data.Models.CableChecklists", "CoverPagesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("overDeRhein.Data.Models.CableChecklists", "CoverPagesID");
 
                     b.HasOne("overDeRhein.Data.Models.Users", "Users")
                         .WithMany()
@@ -529,9 +537,7 @@ namespace overDeRhein.Migrations
                 {
                     b.HasOne("overDeRhein.Data.Models.CoverPages", "CoverPage")
                         .WithOne("LiftingTests")
-                        .HasForeignKey("overDeRhein.Data.Models.LiftingTests", "CoverPagesID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("overDeRhein.Data.Models.LiftingTests", "CoverPagesID");
 
                     b.HasOne("overDeRhein.Data.Models.Users", "Users")
                         .WithMany()
@@ -546,9 +552,7 @@ namespace overDeRhein.Migrations
                 {
                     b.HasOne("overDeRhein.Data.Models.UserType", "UserType")
                         .WithMany("Users")
-                        .HasForeignKey("UserTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserTypeID");
 
                     b.Navigation("UserType");
                 });

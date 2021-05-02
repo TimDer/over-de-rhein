@@ -7,5 +7,6 @@ namespace overDeRhein.ViewModels
     {
         public List<CoverPages> CoverPages { get; set; }
         public List<CoverPageType> CoverPageType { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

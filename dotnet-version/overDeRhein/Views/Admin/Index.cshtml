@@ -1,0 +1,41 @@
+@model overDeRhein.ViewModels.AdminIndexViewModel;
+
+<a asp-controller="Home" class="btn btn-primary coverPages">Home</a>
+<a asp-controller="Admin" asp-action="Add" class="btn btn-primary coverPages">Een gebruiker toevoegen</a>
+    
+<div class="content-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Gebruiker nummer</th>
+                <th>Gebruikersnaam</th>
+                <th>Type gebruiker</th>
+                <th>Actie</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserID</td>
+                    <td>@user.UserName</td>
+                    <td>@user.UserType.Type</td>
+                    <td>
+                        <a asp-controller="Admin"
+                            asp-action="edit"
+                            asp-route-type="@user.UserID"
+                            class="btn btn-primary">
+                            Bewerken
+                        </a>
+                        <a asp-controller="AdminSubmit"
+                            asp-action="delete"
+                            asp-route-type="@user.UserID"
+                            class="btn btn-primary">
+                            Verwijderen
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

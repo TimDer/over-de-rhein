@@ -20,14 +20,14 @@ namespace overDeRhein.Controllers
 
         public IActionResult Index()
         {
-            CoverPageStatusModel statusModel = new CoverPageStatusModel(_AppDbContext, "Open");
+            CoverPageStatusModel statusModel = new CoverPageStatusModel(_AppDbContext, "Open", HttpContext);
 
             return View("CoverPage", statusModel.ViewModel);
         }
 
         public IActionResult StatusClosed()
         {
-            CoverPageStatusModel statusModel = new CoverPageStatusModel(_AppDbContext, "Gesloten");
+            CoverPageStatusModel statusModel = new CoverPageStatusModel(_AppDbContext, "Gesloten", HttpContext);
 
             return View("CoverPage", statusModel.ViewModel);
         }

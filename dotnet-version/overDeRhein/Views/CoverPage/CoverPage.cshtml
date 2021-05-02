@@ -10,6 +10,13 @@
     </a>
 }
 
+@if (Model.IsAdmin)
+{
+    <a asp-controller="Admin" class="btn btn-primary coverPages">
+        Admin Sectie
+    </a>
+}
+
 <div class="content-container">
     <h1>Overzicht</h1>
 

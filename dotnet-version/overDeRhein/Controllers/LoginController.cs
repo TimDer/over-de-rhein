@@ -44,7 +44,8 @@ namespace overDeRhein.Controllers
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, query.UserID.ToString()),
-                        new Claim(ClaimTypes.Name, query.UserName)
+                        new Claim(ClaimTypes.Name, query.UserName),
+                        new Claim(ClaimTypes.Role, (query.UserType.Role == 1) ? "Admin" : "User")
                     };
 
                     var claimsIdentity = new ClaimsIdentity(
